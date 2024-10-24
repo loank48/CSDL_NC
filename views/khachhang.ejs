@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Manager</h2>
+        <a href="khachhang/add-customer" class="btn btn-success float-right">Add Customer</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% customers.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateCustomer('<%= entry._id %>')">
+                <td><%= entry.MaKH %></td>
+                <td><%= entry.TenKH %></td>
+                <td><%= entry.GioiTinh %></td>
+                <td><%= entry.NgaySinh %></td>
+                <td><%= entry.DiaChi %></td>
+                <td><%= entry.Email %></td>
+                <td><%= entry.SDT %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateCustomer('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateCustomer(value) {
+                $(location).attr('href', 'khachhang/update-customer/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

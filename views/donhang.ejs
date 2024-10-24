@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Manager</h2>
+        <a href="donhang/add-order" class="btn btn-success float-right">Add Order</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Date</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% orders.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateOrder('<%= entry._id %>')">
+                <td><%= entry.MaDonHang %></td>
+                <td><%= entry.MaKH %></td>
+                <td><%= entry.NgayLap %></td>
+                <td><%= entry.TongTien %></td>
+                <td><%= entry.TrangThai %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateOrder('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateOrder(value) {
+                $(location).attr('href', 'donhang/update-order/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

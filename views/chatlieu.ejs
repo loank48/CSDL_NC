@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Material Manager</h2>
+        <a href="chatlieu/add-material" class="btn btn-success float-right">Add Material</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Material ID</th>
+                    <th>Material Name</th>
+                    <th>Material Description</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% materials.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateMaterial('<%= entry._id %>')">
+                <td><%= entry.MaChatLieu %></td>
+                <td><%= entry.TenChatLieu %></td>
+                <td><%= entry.MoTa %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateMaterial('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateMaterial(value) {
+                $(location).attr('href', 'chatlieu/update-material/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Participation Manager</h2>
+        <a href="participation/add-participation" class="btn btn-success float-right">Add Participation</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% participations.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateParticipation('<%= entry._id %>')">
+                <td><%= entry.MaKH %></td>
+                <td><%= entry.NgayTG %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateParticipation('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateParticipation(value) {
+                $(location).attr('href', 'participation/update-participation/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stores</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Store Manager</h2>
+        <a href="cuahang/add-store" class="btn btn-success float-right">Add Store</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Store ID</th>
+                    <th>Store Name</th>
+                    <th>Number of staffs</th>
+                    <th>Address</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% stores.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateStore('<%= entry._id %>')">
+                <td><%= entry.MaCH %></td>
+                <td><%= entry.TenCH %></td>
+                <td><%= entry.TongNV %></td>
+                <td><%= entry.DiaChi %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateStore('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateStore(value) {
+                $(location).attr('href', 'cuahang/update-store/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

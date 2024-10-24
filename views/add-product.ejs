@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/product"><h3>Product page</h3></a>
+        <h2>ADD PRODUCT</h2>
+        <form action="/product" method="POST">
+            <div class="form-group">
+                <label>Product ID</label>
+                <input class="form-control" type="text" name='MASP'>
+            </div>
+            <div class="form-group">
+                <label>Product Name</label>
+                <input class="form-control" type="text" name='TenSP'>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" type="text" name='MoTaSP'>
+            </div>
+            <div class="form-group">
+                <label>Selling Price</label>
+                <input class="form-control" type="text" name='GiaBan'>
+            </div>
+            <div class="form-group">
+                <label>Original Price</label>
+                <input class="form-control" type="text" name='GiaGoc'>
+            </div>
+            <div class="form-group">
+                <label>Stock</label>
+                <input class="form-control" type="number" name='TonKho'>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input class="form-control" type="text" name='MaLoai'>
+            </div>
+            <div class="form-group">
+                <label>Material</label>
+                <input class="form-control" type="text" name='MaChatLieu'>
+            </div>
+            <div class="form-group">
+                <label>Color</label>
+                <input class="form-control" type="text" name='MaMau'>
+            </div>
+            <div class="form-group">
+                <label>Size</label>
+                <input class="form-control" type="text" name='MaSize'>
+            </div>
+            <input id="add-btn" class="btn btn-primary" type="submit" value="ADD PRODUCT">
+        </form>
+    </div>
+</body>
+</html>

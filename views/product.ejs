@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Product Manager</h2>
+        <a href="product/add-product" class="btn btn-success float-right">Add Product</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Description</th>
+                    <th>Selling Price</th>
+                    <th>Cost Price</th>
+                    <th>Stock</th>
+                    <th>Product Type</th>
+                    <th>Material ID</th>
+                    <th>Color ID</th>
+                    <th>Size ID</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% products.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateProduct('<%= entry._id %>')">
+                <td><%= entry.MASP %></td>
+                <td><%= entry.TenSP %></td>
+                <td><%= entry.MoTaSP %></td>
+                <td><%= entry.GiaBan %></td>
+                <td><%= entry.GiaGoc %></td>
+                <td><%= entry.TonKho %></td>
+                <td><%= entry.MaLoai %></td>
+                <td><%= entry.MaChatLieu %></td>
+                <td><%= entry.MaMau %></td>
+                <td><%= entry.MaSize %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateProduct('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateProduct(value) {
+                $(location).attr('href', 'product/update-product/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

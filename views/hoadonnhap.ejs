@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Invoices</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Purchase Invoice Manager</h2>
+        <a href="/hoadonnhap/add-purchase-invoice" class="btn btn-success float-right">Add Purchase Invoice</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Purchase Invoice ID</th>
+                    <th>Date</th>
+                    <th>Costs</th>
+                    <th>Staff ID</th>
+                    <th>Supplier ID</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% purchaseInvoices.forEach((entry) => { %>
+            <tr ondblclick="handleUpdatePurchaseInvoice('<%= entry._id %>')">
+                <td><%= entry.MaHDN %></td>
+                <td><%= entry.NgayNhap %></td>
+                <td><%= entry.TongTienTra %></td>
+                <td><%= entry.MaNV %></td>
+                <td><%= entry.MaNCC %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdatePurchaseInvoice('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdatePurchaseInvoice(value) {
+                $(location).attr('href', '/hoadonnhap/update-purchase-invoice/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

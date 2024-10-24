@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staffs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Staff Manager</h2>
+        <a href="staff/add-staff" class="btn btn-success float-right">Add Staff</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Staff Name</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% staffs.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateStaff('<%= entry._id %>')">
+                <td><%= entry.MaNV %></td>
+                <td><%= entry.TenNV %></td>
+                <td><%= entry.NgaySinh %></td>
+                <td><%= entry.GioiTinh %></td>
+                <td><%= entry.Email %></td>
+                <td><%= entry.SDT %></td>
+                <td><%= entry.DiaChi %></td>
+                <td><%= entry.ChucVu %></td>
+                <td><%= entry.Luong %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateStaff('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateStaff(value) {
+                $(location).attr('href', 'staff/update-staff/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

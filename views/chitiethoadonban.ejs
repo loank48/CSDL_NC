@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Invoice Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Sales Invoice Detail Manager</h2>
+        <a href="/chitiethoadonban/add-sales-invoice-detail" class="btn btn-success float-right">Add Sales Invoice Detail</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Sales Invoice Detail ID</th>
+                    <th>Product ID</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% salesInvoiceDetails.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateSalesInvoiceDetail('<%= entry._id %>')">
+                <td><%= entry.MaHDB %></td>
+                <td><%= entry.MaSP %></td>
+                <td><%= entry.SoLuongBan %></td>
+                <td><%= entry.DonGiaBan %></td>
+                <td><%= entry.GiamGia %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateSalesInvoiceDetail('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateSalesInvoiceDetail(value) {
+                $(location).attr('href', '/chitiethoadonban/update-sales-invoice-detail/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>

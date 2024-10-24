@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Tiers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Membership Tier Manager</h2>
+        <a href="membershipTier/add-membership-tier" class="btn btn-success float-right">Add Membership Tier</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Membership Tier ID</th>
+                    <th>Membership Tier Name</th>
+                    <th>Discount</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <% membershipTiers.forEach((entry) => { %>
+            <tr ondblclick="handleUpdateMembershipTier('<%= entry._id %>')">
+                <td><%= entry.MaLoaiThe %></td>
+                <td><%= entry.TenLoaiThe %></td>
+                <td><%= entry.UuDai %></td>
+                <td>
+                    <input class="btn btn-primary" type="button" value="Update"
+                        onclick="handleUpdateMembershipTier('<%= entry._id %>')">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <script>
+            function handleUpdateMembershipTier(value) {
+                $(location).attr('href', 'membershipTier/update-membershipTier/' + value);
+            }
+        </script>
+    </div>
+</body>
+</html>
