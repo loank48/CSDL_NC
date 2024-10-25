@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // Go to Add Staff page
-router.get('/add-staffs', (req, res) => {
+router.get('/add-staff', (req, res) => {
     res.render('add-staff');
 });
 

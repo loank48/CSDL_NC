@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Staff</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/nhanvien"><h3>Staff Page</h3></a>
+        <h2>ADD STAFF</h2>
+        <form action="/nhanvien" method="POST">
+            <div class="form-group">
+                <label>STAFF ID</label>
+                <input class="form-control" type="text" name='MaNV'>
+            </div>
+            <div class="form-group">
+                <label>Staff Name</label>
+                <input class="form-control" type="text" name='TenNV'>
+            </div>
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input class="form-control" type="date" name='NgaySinh'>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <input class="form-control" type="text" name='GioiTinh'>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="text" name='Email'>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input class="form-control" type="number" name='SDT'>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" type="text" name='DiaChi'>
+            </div>
+            <div class="form-group">
+                <label>Position</label>
+                <input class="form-control" type="text" name='ChucVu'>
+            </div>
+            <div class="form-group">
+                <label>Salary</label>
+                <input class="form-control" type="number" name='Luong'>
+            </div>
+            <input id="add-btn" class="btn btn-primary" type="submit" value="ADD STAFF">
+        </form>
+    </div>
+</body>
+</html>

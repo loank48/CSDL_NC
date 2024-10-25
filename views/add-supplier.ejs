@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Supplier</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/nhacungcap"><h3>Supplier Page</h3></a>
+        <h2>ADD SUPPLIER</h2>
+        <form action="/nhacungcap" method="POST">
+            <div class="form-group">
+                <label>Supplier ID</label>
+                <input class="form-control" type="text" name='MaNCC'>
+            </div>
+            <div class="form-group">
+                <label>Supplier Name</label>
+                <input class="form-control" type="text" name='TenNCC'>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input class="form-control" type="number" name='SDT'>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" type="text" name='DiaChi'>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="text" name='Email'>
+            </div>
+            <input id="add-btn" class="btn btn-primary" type="submit" value="ADD SUPPLIER">
+        </form>
+    </div>
+</body>
+</html>

@@ -14,8 +14,8 @@ router.get('/', async (req, res) => {
 });
 
 // Go to Add Membership Cards page
-router.get('/add-membershipCard', (req, res) => {
-    res.render('add-membershipCard');
+router.get('/add-membership-card', (req, res) => {
+    res.render('add-membership-card');
 });
 
 // Add new membership card

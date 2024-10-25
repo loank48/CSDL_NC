@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/loaisanpham"><h3>Category Page</h3></a>
+        <h2>ADD CATEGORY</h2>
+        <form action="/loaisanpham" method="POST">
+            <div class="form-group">
+                <label>Category ID</label>
+                <input class="form-control" type="text" name='MaLoai'>
+            </div>
+            <div class="form-group">
+                <label>Category Name</label>
+                <input class="form-control" type="text" name='TenLoai'>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" type="text" name='MoTaLSP'>
+            </div>
+            <input id="add-btn" class="btn btn-primary" type="submit" value="ADD CATEGORY">
+        </form>
+    </div>
+</body>
+</html>
