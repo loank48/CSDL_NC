@@ -1,11 +1,25 @@
 const mongoose = require('mongoose');
 
-const khuyenMaiSchema = new mongoose.Schema({
-    MaKM: String,
-    TGBatDau: String,
-    TGKetThuc: String,
-    NoiDung: String,
-    MaSP: String
-}, { collection: 'KHUYENMAI' });
+class KhuyenMai {
+    constructor() {
+        // Định nghĩa schema
+        const khuyenMaiSchema = new mongoose.Schema({
+            MaKM: String,
+            TGBatDau: String,
+            TGKetThuc: String,
+            NoiDung: String,
+            MaSP: String
+        }, { collection: 'KHUYENMAI' });
 
-module.exports = mongoose.model('KhuyenMai', khuyenMaiSchema);
+        // Khởi tạo model và gán vào thuộc tính của class
+        this.model = mongoose.model('KhuyenMai', khuyenMaiSchema);
+    }
+
+    // Phương thức để lấy model
+    getModel() {
+        return this.model;
+    }
+}
+
+// Export ra một instance của KhuyenMai
+module.exports = new KhuyenMai().getModel();

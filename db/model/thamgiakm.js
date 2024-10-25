@@ -1,8 +1,22 @@
 const mongoose = require('mongoose');
 
-const thamGiaKMSchema = new mongoose.Schema({
-    MaKH: String,
-    NgayTG: String
-}, { collection: 'THAMGIAKM' });
+class ThamGiaKM {
+    constructor() {
+        // Định nghĩa schema
+        const thamGiaKMSchema = new mongoose.Schema({
+            MaKH: String,
+            NgayTG: String
+        }, { collection: 'THAMGIAKM' });
 
-module.exports = mongoose.model('ThamGiaKM', thamGiaKMSchema);
+        // Khởi tạo model và gán vào thuộc tính của class
+        this.model = mongoose.model('ThamGiaKM', thamGiaKMSchema);
+    }
+
+    // Phương thức để lấy model
+    getModel() {
+        return this.model;
+    }
+}
+
+// Export ra một instance của ThamGiaKM
+module.exports = new ThamGiaKM().getModel();

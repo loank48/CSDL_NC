@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+// Import các route
 const binhLuanRoutes = require('./routes/binhluan');
 const chatLieuRoutes = require('./routes/chatlieu');
 const cuaHangRoutes = require('./routes/cuahang');
@@ -22,42 +23,66 @@ const theThanhVienRoutes = require('./routes/thethanhvien');
 const chiTietHoaDonNhapRoutes = require('./routes/chitiethoadonnhap');
 const chiTietHoaDonBanRoutes = require('./routes/chitiethoadonban');
 
-const app = express();
+// Class Server để quản lý việc khởi động ứng dụng và kết nối cơ sở dữ liệu
+class Server {
+    constructor() {
+        this.app = express(); // Tạo instance của Express
+        this.config();        // Cấu hình middleware và view engine
+        this.routes();        // Cấu hình các route
+        this.connectToDatabase(); // Kết nối cơ sở dữ liệu
+    }
 
-mongoose.connect('mongodb://localhost:27017/CSDL_SHOPQA')
-    .then(() => console.log('Database connected successfully!'))
-    .catch(err => console.log('Database connection error:', err));
+    // Cấu hình middleware và view engine
+    config() {
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.set('view engine', 'ejs');
+        this.app.set('views', './views');
+    }
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.set('views', './views');
+    // Kết nối đến MongoDB
+    connectToDatabase() {
+        mongoose.connect('mongodb://localhost:27017/CSDL_SHOPQA')
+            .then(() => console.log('Database connected successfully!'))
+            .catch(err => console.log('Database connection error:', err));
+    }
 
-// Định tuyến cho trang chủ
-app.get('/', (req, res) => {
-    res.render('home');
-});
+    // Cấu hình các route
+    routes() {
+        this.app.get('/', (req, res) => {
+            res.render('home');
+        });
 
-// Định tuyến cho các collection
-app.use('/binhluan', binhLuanRoutes);
-app.use('/chatlieu', chatLieuRoutes);
-app.use('/cuahang', cuaHangRoutes);
-app.use('/donhang', donHangRoutes);
-app.use('/hoadonban', hoaDonBanRoutes);
-app.use('/hoadonnhap', hoaDonNhapRoutes);
-app.use('/khachhang', khachHangRoutes);
-app.use('/khuyenmai', khuyenMaiRoutes);
-app.use('/loaisanpham', loaiSanPhamRoutes);
-app.use('/loaithethanhvien', loaiTheThanhVienRoutes);
-app.use('/mausac', mauSacRoutes);
-app.use('/nhacungcap', nhaCungCapRoutes);
-app.use('/nhanvien', nhanVienRoutes);
-app.use('/product', productRoutes); // Đổi tên biến từ proDuctRoutes thành productRoutes
-app.use('/size', sizeRoutes);
-app.use('/thamgiakm', thamGiaKMRoutes);
-app.use('/thethanhvien', theThanhVienRoutes);
-app.use('/chitiethoadonnhap', chiTietHoaDonNhapRoutes);
-app.use('/chitiethoadonban', chiTietHoaDonBanRoutes);
+        // Sử dụng các route cho từng collection
+        this.app.use('/binhluan', binhLuanRoutes);
+        this.app.use('/chatlieu', chatLieuRoutes);
+        this.app.use('/cuahang', cuaHangRoutes);
+        this.app.use('/donhang', donHangRoutes);
+        this.app.use('/hoadonban', hoaDonBanRoutes);
+        this.app.use('/hoadonnhap', hoaDonNhapRoutes);
+        this.app.use('/khachhang', khachHangRoutes);
+        this.app.use('/khuyenmai', khuyenMaiRoutes);
+        this.app.use('/loaisanpham', loaiSanPhamRoutes);
+        this.app.use('/loaithethanhvien', loaiTheThanhVienRoutes);
+        this.app.use('/mausac', mauSacRoutes);
+        this.app.use('/nhacungcap', nhaCungCapRoutes);
+        this.app.use('/nhanvien', nhanVienRoutes);
+        this.app.use('/product', productRoutes);
+        this.app.use('/size', sizeRoutes);
+        this.app.use('/thamgiakm', thamGiaKMRoutes);
+        this.app.use('/thethanhvien', theThanhVienRoutes);
+        this.app.use('/chitiethoadonnhap', chiTietHoaDonNhapRoutes);
+        this.app.use('/chitiethoadonban', chiTietHoaDonBanRoutes);
+    }
 
-app.listen(3000, function () {
-    console.log("Starting at port 3000...");
-});
+    // Phương thức khởi động server
+    start() {
+        const port = 3000;
+        this.app.listen(port, () => {
+            console.log(`Starting at port ${port}...`);
+        });
+    }
+}
+
+// Tạo một instance của Server và khởi động
+const server = new Server();
+server.start();

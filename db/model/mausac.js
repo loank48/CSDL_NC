@@ -1,8 +1,22 @@
 const mongoose = require('mongoose');
 
-const mauSacSchema = new mongoose.Schema({
-    MaMau: String,
-    TenMau: String
-}, { collection: 'MAUSAC' });
+class MauSac {
+    constructor() {
+        // Định nghĩa schema
+        const mauSacSchema = new mongoose.Schema({
+            MaMau: String,
+            TenMau: String
+        }, { collection: 'MAUSAC' });
 
-module.exports = mongoose.model('MauSac', mauSacSchema);
+        // Khởi tạo model và gán vào thuộc tính của class
+        this.model = mongoose.model('MauSac', mauSacSchema);
+    }
+
+    // Phương thức để lấy model
+    getModel() {
+        return this.model;
+    }
+}
+
+// Export ra một instance của MauSac
+module.exports = new MauSac().getModel();

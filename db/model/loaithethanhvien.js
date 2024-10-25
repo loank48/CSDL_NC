@@ -1,9 +1,23 @@
 const mongoose = require('mongoose');
 
-const loaiTheThanhVienSchema = new mongoose.Schema({
-    MaLoaiThe: String,
-    TenLoaiThe: String,
-    UuDai: String
-}, { collection: 'LOAITHETHANHVIEN' });
+class LoaiTheThanhVien {
+    constructor() {
+        // Định nghĩa schema
+        const loaiTheThanhVienSchema = new mongoose.Schema({
+            MaLoaiThe: String,
+            TenLoaiThe: String,
+            UuDai: String
+        }, { collection: 'LOAITHETHANHVIEN' });
 
-module.exports = mongoose.model('LoaiTheThanhVien', loaiTheThanhVienSchema);
+        // Khởi tạo model và gán vào thuộc tính của class
+        this.model = mongoose.model('LoaiTheThanhVien', loaiTheThanhVienSchema);
+    }
+
+    // Phương thức để lấy model
+    getModel() {
+        return this.model;
+    }
+}
+
+// Export ra một instance của LoaiTheThanhVien
+module.exports = new LoaiTheThanhVien().getModel();
