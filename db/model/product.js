@@ -27,8 +27,4 @@ class Product {
 }
 
 // Export ra một instance của Product
-<<<<<<< Updated upstream
 module.exports = new Product().getModel();
-=======
-module.exports = new Product().getModel();
->>>>>>> Stashed changes

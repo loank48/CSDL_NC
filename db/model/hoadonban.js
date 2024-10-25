@@ -23,8 +23,4 @@ class HoaDonBan {
 }
 
 // Export ra một instance của HoaDonBan
-<<<<<<< Updated upstream
 module.exports = new HoaDonBan().getModel();
-=======
-module.exports = new HoaDonBan().getModel();
->>>>>>> Stashed changes

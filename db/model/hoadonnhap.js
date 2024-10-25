@@ -22,8 +22,4 @@ class HoaDonNhap {
 }
 
 // Export ra một instance của HoaDonNhap
-<<<<<<< Updated upstream
 module.exports = new HoaDonNhap().getModel();
-=======
-module.exports = new HoaDonNhap().getModel();
->>>>>>> Stashed changes

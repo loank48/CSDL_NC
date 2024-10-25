@@ -24,8 +24,4 @@ class KhachHang {
 }
 
 // Export ra một instance của KhachHang
-<<<<<<< Updated upstream
 module.exports = new KhachHang().getModel();
-=======
-module.exports = new KhachHang().getModel();
->>>>>>> Stashed changes

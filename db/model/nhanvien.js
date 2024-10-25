@@ -26,8 +26,4 @@ class NhanVien {
 }
 
 // Export ra một instance của NhanVien
-<<<<<<< Updated upstream
 module.exports = new NhanVien().getModel();
-=======
-module.exports = new NhanVien().getModel();
->>>>>>> Stashed changes

@@ -21,8 +21,4 @@ class CuaHang {
 }
 
 // Export ra một instance của CuaHang
-<<<<<<< Updated upstream
 module.exports = new CuaHang().getModel();
-=======
-module.exports = new CuaHang().getModel();
->>>>>>> Stashed changes

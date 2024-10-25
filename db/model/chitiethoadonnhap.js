@@ -21,8 +21,4 @@ class ChiTietHoaDonNhap {
 }
 
 // Export ra một instance của ChiTietHoaDonNhap
-<<<<<<< Updated upstream
 module.exports = new ChiTietHoaDonNhap().getModel();
-=======
-module.exports = new ChiTietHoaDonNhap().getModel();
->>>>>>> Stashed changes
