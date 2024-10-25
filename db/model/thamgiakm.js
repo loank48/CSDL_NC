@@ -19,4 +19,8 @@ class ThamGiaKM {
 }
 
 // Export ra một instance của ThamGiaKM
+<<<<<<< Updated upstream
 module.exports = new ThamGiaKM().getModel();
+=======
+module.exports = new ThamGiaKM().getModel();
+>>>>>>> Stashed changes

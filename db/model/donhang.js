@@ -22,4 +22,8 @@ class DonHang {
 }
 
 // Export ra một instance của DonHang
+<<<<<<< Updated upstream
 module.exports = new DonHang().getModel();
+=======
+module.exports = new DonHang().getModel();
+>>>>>>> Stashed changes
