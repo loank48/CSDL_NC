@@ -20,4 +20,8 @@ class LoaiTheThanhVien {
 }
 
 // Export ra một instance của LoaiTheThanhVien
+<<<<<<< Updated upstream
 module.exports = new LoaiTheThanhVien().getModel();
+=======
+module.exports = new LoaiTheThanhVien().getModel();
+>>>>>>> Stashed changes

@@ -20,4 +20,8 @@ class ChatLieu {
 }
 
 // Export ra một instance của ChatLieu
+<<<<<<< Updated upstream
 module.exports = new ChatLieu().getModel();
+=======
+module.exports = new ChatLieu().getModel();
+>>>>>>> Stashed changes

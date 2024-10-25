@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Import các route
+<<<<<<< Updated upstream
+=======
+const anhRoutes = require('./routes/anh');
+>>>>>>> Stashed changes
 const binhLuanRoutes = require('./routes/binhluan');
 const chatLieuRoutes = require('./routes/chatlieu');
 const cuaHangRoutes = require('./routes/cuahang');
@@ -53,6 +57,10 @@ class Server {
         });
 
         // Sử dụng các route cho từng collection
+<<<<<<< Updated upstream
+=======
+        this.app.use('/anh', anhRoutes);
+>>>>>>> Stashed changes
         this.app.use('/binhluan', binhLuanRoutes);
         this.app.use('/chatlieu', chatLieuRoutes);
         this.app.use('/cuahang', cuaHangRoutes);
@@ -85,4 +93,8 @@ class Server {
 
 // Tạo một instance của Server và khởi động
 const server = new Server();
+<<<<<<< Updated upstream
 server.start();
+=======
+server.start();
+>>>>>>> Stashed changes

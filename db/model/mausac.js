@@ -19,4 +19,8 @@ class MauSac {
 }
 
 // Export ra một instance của MauSac
+<<<<<<< Updated upstream
 module.exports = new MauSac().getModel();
+=======
+module.exports = new MauSac().getModel();
+>>>>>>> Stashed changes

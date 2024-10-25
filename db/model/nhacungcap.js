@@ -22,4 +22,8 @@ class NhaCungCap {
 }
 
 // Export ra một instance của NhaCungCap
+<<<<<<< Updated upstream
 module.exports = new NhaCungCap().getModel();
+=======
+module.exports = new NhaCungCap().getModel();
+>>>>>>> Stashed changes

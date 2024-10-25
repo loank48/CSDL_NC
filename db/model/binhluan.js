@@ -21,4 +21,8 @@ class BinhLuan {
 }
 
 // Export một instance của class BinhLuan để sử dụng
+<<<<<<< Updated upstream
 module.exports = new BinhLuan().getModel();
+=======
+module.exports = new BinhLuan().getModel();
+>>>>>>> Stashed changes

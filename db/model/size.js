@@ -19,4 +19,8 @@ class Size {
 }
 
 // Export ra một instance của Size
+<<<<<<< Updated upstream
 module.exports = new Size().getModel();
+=======
+module.exports = new Size().getModel();
+>>>>>>> Stashed changes

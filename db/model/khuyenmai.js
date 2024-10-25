@@ -22,4 +22,8 @@ class KhuyenMai {
 }
 
 // Export ra một instance của KhuyenMai
+<<<<<<< Updated upstream
 module.exports = new KhuyenMai().getModel();
+=======
+module.exports = new KhuyenMai().getModel();
+>>>>>>> Stashed changes
