@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Membership Tier</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="/loaithethanhvien"><h3>Membership Tier Page</h3></a>
+        <h2>UPDATE MEMBERSHIP TIER</h2>
+        <form action="/loaithethanhvien/<%= membershipTier._id %>" method="POST">
+            <div class="form-group">
+                <label>Membership Tier ID</label>
+                <input class="form-control" type="text" name='MaLoaiThe' value="<%= membershipTier.MaLoaiThe %>">
+            </div>
+            <div class="form-group">
+                <label>Membership Tier Name</label>
+                <input class="form-control" type="text" name='TenLoai' value="<%= membershipTier.TenLoaiThe %>">
+            </div>
+            <div class="form-group">
+                <label>Discount</label>
+                <input class="form-control" type="text" name='UuDai' value="<%= membershipTier.UuDai %>">
+            </div>
+            <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
+            <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
+                onclick="handleDeleteMembershipTier('<%= membershipTier._id %>')">
+        </form>
+    </div>
+    <script>
+        function handleDeleteMembershipTier(value) {
+            $.ajax({
+                url: '/loaithethanhvien/' + value,
+                type: 'DELETE',
+                success: function (result) {
+                    $(location).attr('href', '/');
+                }
+            })
+        }
+    </script>
+</body>
+</html>

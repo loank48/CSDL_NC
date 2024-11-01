@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Sales Invoice</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="/hoadonban"><h3>Sales Invoice Page</h3></a>
+        <h2>UPDATE SALES INVOICE</h2>
+        <form action="/hoadonban/<%= salesInvoice._id %>" method="POST">
+            <div class="form-group">
+                <label>Sales Invoice ID</label>
+                <input class="form-control" type="text" name='MaHDB' value="<%= salesInvoice.MaHDB %>">
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input class="form-control" type="number" name='SoLuongBan' value="<%= salesInvoice.SoLuongBan %>">
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input class="form-control" type="date" name='NgayBan' value="<%= salesInvoice.NgayBan %>">
+            </div>
+            <div class="form-group">
+                <label>Revenue</label>
+                <input class="form-control" type="number" name='TongTienThu' value="<%= salesInvoice.TongTienThu %>">
+            </div>
+            <div class="form-group">
+                <label>Customer ID</label>
+                <input class="form-control" type="text" name='MaKH' value="<%= salesInvoice.MaKH %>">
+            </div>
+            <div class="form-group">
+                <label>Store ID</label>
+                <input class="form-control" type="text" name='MaCH' value="<%= salesInvoice.MaCH %>">
+            </div>
+            <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
+            <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
+                onclick="handleDeleteSalesInvoice('<%= salesInvoice._id %>')">
+        </form>
+    </div>
+    <script>
+        function handleDeleteSalesInvoice(value) {
+            $.ajax({
+                url: '/hoadonban/' + value,
+                type: 'DELETE',
+                success: function (result) {
+                    $(location).attr('href', '/');
+                }
+            })
+        }
+    </script>
+</body>
+</html>

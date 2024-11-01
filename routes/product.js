@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
             MaLoai: req.body.MaLoai,
             MaChatLieu: req.body.MaChatLieu,
             MaMau: req.body.MaMau,
-            MaSize: req.body.MaSize
+            MaSize: req.body.MaSize,
+            UrlImage: req.body.UrlImage
         });
 
         await newProduct.save();
@@ -95,7 +96,8 @@ router.post('/:productId', async (req, res) => {
                     MaLoai: req.body.MaLoai,
                     MaChatLieu: req.body.MaChatLieu,
                     MaMau: req.body.MaMau,
-                    MaSize: req.body.MaSize
+                    MaSize: req.body.MaSize,
+                    UrlImage: req.body.UrlImage
                 }
             },
             { useFindAndModify: false }

@@ -13,7 +13,8 @@ class Product {
             MaLoai: String,
             MaChatLieu: String,
             MaMau: String,
-            MaSize: String
+            MaSize: String,
+            UrlImage: String
         }, { collection: 'SANPHAM' }); // Chỉ định collection là SANPHAM
 
         // Khởi tạo model và gán vào thuộc tính của class

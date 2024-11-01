@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Customer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="/khachhang"><h3>Customer Page</h3></a>
+        <h2>UPDATE CUSTOMER</h2>
+        <form action="/khachhang/<%= customer._id %>" method="POST">
+            <div class="form-group">
+                <label>Customer ID</label>
+                <input class="form-control" type="text" name='MaKH' value="<%= customer.MaKH %>">
+            </div>
+            <div class="form-group">
+                <label>Customer Name</label>
+                <input class="form-control" type="text" name='TenKH' value="<%= customer.TenKH %>">
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <input class="form-control" type="text" name='GioiTinh' value="<%= customer.GioiTinh %>">
+            </div>
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input class="form-control" type="date" name='NgaySinh' value="<%= customer.NgaySinh %>">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" type="text" name='DiaChi' value="<%= customer.DiaChi %>">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="text" name='Email' value="<%= customer.Email %>">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input class="form-control" type="number" name='SDT' value="<%= customer.SDT %>">
+            </div>
+            <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
+            <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
+                onclick="handleDeleteCustomer('<%= customer._id %>')">
+        </form>
+    </div>
+    <script>
+        function handleDeleteCustomer(value) {
+            $.ajax({
+                url: '/khachhang/' + value,
+                type: 'DELETE',
+                success: function (result) {
+                    $(location).attr('href', '/');
+                }
+            })
+        }
+    </script>
+</body>
+</html>
