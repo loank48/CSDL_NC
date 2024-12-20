@@ -3,24 +3,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Import các route
-const anhRoutes = require('./routes/anh');
-const binhLuanRoutes = require('./routes/binhluan');
-const chatLieuRoutes = require('./routes/chatlieu');
 const cuaHangRoutes = require('./routes/cuahang');
 const donHangRoutes = require('./routes/donhang');
 const hoaDonBanRoutes = require('./routes/hoadonban');
 const hoaDonNhapRoutes = require('./routes/hoadonnhap');
 const khachHangRoutes = require('./routes/khachhang');
-const khuyenMaiRoutes = require('./routes/khuyenmai');
 const loaiSanPhamRoutes = require('./routes/loaisanpham');
-const loaiTheThanhVienRoutes = require('./routes/loaithethanhvien');
-const mauSacRoutes = require('./routes/mausac');
 const nhaCungCapRoutes = require('./routes/nhacungcap');
 const nhanVienRoutes = require('./routes/nhanvien');
-const productRoutes = require('./routes/product'); // Đổi tên biến từ proDuctRoutes thành productRoutes
-const sizeRoutes = require('./routes/size');
-const thamGiaKMRoutes = require('./routes/thamgiakm');
-const theThanhVienRoutes = require('./routes/thethanhvien');
+const productRoutes = require('./routes/product'); 
 const chiTietHoaDonNhapRoutes = require('./routes/chitiethoadonnhap');
 const chiTietHoaDonBanRoutes = require('./routes/chitiethoadonban');
 
@@ -54,24 +45,15 @@ class Server {
         });
 
         // Sử dụng các route cho từng collection
-        this.app.use('/anh', anhRoutes);
-        this.app.use('/binhluan', binhLuanRoutes);
-        this.app.use('/chatlieu', chatLieuRoutes);
         this.app.use('/cuahang', cuaHangRoutes);
         this.app.use('/donhang', donHangRoutes);
         this.app.use('/hoadonban', hoaDonBanRoutes);
         this.app.use('/hoadonnhap', hoaDonNhapRoutes);
         this.app.use('/khachhang', khachHangRoutes);
-        this.app.use('/khuyenmai', khuyenMaiRoutes);
         this.app.use('/loaisanpham', loaiSanPhamRoutes);
-        this.app.use('/loaithethanhvien', loaiTheThanhVienRoutes);
-        this.app.use('/mausac', mauSacRoutes);
         this.app.use('/nhacungcap', nhaCungCapRoutes);
         this.app.use('/nhanvien', nhanVienRoutes);
         this.app.use('/product', productRoutes);
-        this.app.use('/size', sizeRoutes);
-        this.app.use('/thamgiakm', thamGiaKMRoutes);
-        this.app.use('/thethanhvien', theThanhVienRoutes);
         this.app.use('/chitiethoadonnhap', chiTietHoaDonNhapRoutes);
         this.app.use('/chitiethoadonban', chiTietHoaDonBanRoutes);
     }
