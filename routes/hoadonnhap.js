@@ -23,10 +23,11 @@ router.post('/', async (req, res) => {
     try {
         let newPurchaseInvoice = new HoaDonNhap({
             MaHDN: req.body.MaHDN,
+            SoLuongNhap: req.body.SoLuongNhap,
             NgayNhap: req.body.NgayNhap,
             TongTienTra: req.body.TongTienTra,
-            MaNV: req.body.MaNV,
-            MaNCC: req.body.MaNCC
+            // MaNV: req.body.MaNV,
+            MaCH: req.body.MaCH
         });
 
         await newPurchaseInvoice.save();
@@ -70,10 +71,11 @@ router.post('/:purchaseInvoiceId', async (req, res) => {
             {
                 $set: {
                     MaHDN: req.body.MaHDN,
+                    SoLuongNhap: req.body.SoLuongNhap,
                     NgayNhap: req.body.NgayNhap,
                     TongTienTra: req.body.TongTienTra,
-                    MaNV: req.body.MaNV,
-                    MaNCC: req.body.MaNCC
+                    // MaNV: req.body.MaNV,
+                    MaCH: req.body.MaCH
                 }
             },
             { useFindAndModify: false }

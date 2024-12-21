@@ -21,8 +21,9 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Address</th>
-                    <th>Position</th>
-                    <th>Salary</th>
+                    <th>Store ID</th>
+                    <!-- <th>Position</th>
+                    <th>Salary</th> -->
                     <th>Edit</th>
                 </tr>
             </thead>
@@ -34,9 +35,10 @@
                 <td><%= entry.GioiTinh %></td>
                 <td><%= entry.Email %></td>
                 <td><%= entry.SDT %></td>
-                <td><%= entry.DiaChi %></td>
-                <td><%= entry.ChucVu %></td>
-                <td><%= entry.Luong %></td>
+                <td><%= entry.SoNha %>, <%= entry.Duong %>, Q<%= entry.Quan %>, <%= entry.ThanhPho %></td>
+                <td><%= entry.MaCH %></td>
+                <!-- <td><%= entry.ChucVu %></td>
+                <td><%= entry.Luong %></td> -->
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
                         onclick="handleUpdateStaff('<%= entry._id %>')">

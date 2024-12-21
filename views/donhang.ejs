@@ -14,21 +14,23 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Order ID</th>
+                    <!-- <th>Order ID</th> -->
                     <th>Customer Name</th>
+                    <th>Product</th>
                     <th>Date</th>
                     <th>Total Amount</th>
-                    <th>Status</th>
+                    <!-- <th>Status</th> -->
                     <th>Edit</th>
                 </tr>
             </thead>
             <% orders.forEach((entry) => { %>
             <tr ondblclick="handleUpdateOrder('<%= entry._id %>')">
-                <td><%= entry.MaDonHang %></td>
+                <!-- <td><%= entry.MaDonHang %></td> -->
                 <td><%= entry.MaKH %></td>
+                <td><%= entry.MaSP %></td>
                 <td><%= entry.NgayLap %></td>
                 <td><%= entry.TongTien %></td>
-                <td><%= entry.TrangThai %></td>
+                <!-- <td><%= entry.TrangThai %></td> -->
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
                         onclick="handleUpdateOrder('<%= entry._id %>')">

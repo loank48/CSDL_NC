@@ -4,11 +4,12 @@ class DonHang {
     constructor() {
         // Định nghĩa schema
         const donHangSchema = new mongoose.Schema({
-            MaDonHang: String,
+            // MaDonHang: String,
             MaKH: String,
+            MaSP: String,
             NgayLap: String,
-            TongTien: String,
-            TrangThai: String
+            ThanhTien: String
+            // TrangThai: String
         }, { collection: 'DONHANG' });
 
         // Khởi tạo model và gán vào thuộc tính của class

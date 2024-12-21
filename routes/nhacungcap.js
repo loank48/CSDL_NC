@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
             MaNCC: req.body.MaNCC,
             TenNCC: req.body.TenNCC,
             SDT: req.body.SDT,
-            DiaChi: req.body.DiaChi,
+            // DiaChi: req.body.DiaChi,
             Email: req.body.Email
         });
 
@@ -72,7 +72,7 @@ router.post('/:supplierId', async (req, res) => {
                     MaNCC: req.body.MaNCC,
                     TenNCC: req.body.TenNCC,
                     SDT: req.body.SDT,
-                    DiaChi: req.body.DiaChi,
+                    // DiaChi: req.body.DiaChi,
                     Email: req.body.Email
                 }
             },

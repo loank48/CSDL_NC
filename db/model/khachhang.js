@@ -20,7 +20,7 @@ class KhachHang {
     // Phương thức để lấy model
     getModel() {
         return this.model;
-    }
+    }  
 }
 
 // Export ra một instance của KhachHang

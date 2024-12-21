@@ -22,10 +22,20 @@ router.get('/add-store', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let newStore = new CuaHang({
+            // MaCH: req.body.MaCH,
+            // TenCH: req.body.TenCH,
+            // TongNV: req.body.TongNV,
+            // DiaChi: req.body.DiaChi
+
             MaCH: req.body.MaCH,
             TenCH: req.body.TenCH,
             TongNV: req.body.TongNV,
-            DiaChi: req.body.DiaChi
+            DiaChi: {
+                SoNha: req.body.SoNha,
+                Duong: req.body.Duong,
+                Quan: req.body.Quan,
+                ThanhPho: req.body.ThanhPho
+                } 
         });
 
         await newStore.save();
@@ -71,7 +81,12 @@ router.post('/:storeId', async (req, res) => {
                     MaCH: req.body.MaCH,
                     TenCH: req.body.TenCH,
                     TongNV: req.body.TongNV,
-                    DiaChi: req.body.DiaChi
+                    DiaChi: {
+                        SoNha: req.body.SoNha,
+                        Duong: req.body.Duong,
+                        Quan: req.body.Quan,
+                        ThanhPho: req.body.ThanhPho
+                    } 
                 }
             },
             { useFindAndModify: false }

@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         let newCategory = new LoaiSanPham({
             MaLoai: req.body.MaLoai,
             TenLoai: req.body.TenLoai,
-            MoTaLSP: req.body.MoTaLSP
+            // MoTaLSP: req.body.MoTaLSP
         });
 
         await newCategory.save();
@@ -69,7 +69,7 @@ router.post('/:categoryId', async (req, res) => {
                 $set: {
                     MaLoai: req.body.MaLoai,
                     TenLoai: req.body.TenLoai,
-                    MoTaLSP: req.body.MoTaLSP
+                    // MoTaLSP: req.body.MoTaLSP
                 }
             },
             { useFindAndModify: false }

@@ -22,11 +22,12 @@ router.get('/add-order', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let newOrder = new DonHang({
-            MaDonHang: req.body.MaDonHang,
+            // MaDonHang: req.body.MaDonHang,
             MaKH: req.body.MaKH,
+            MaSP: req.body.MaSP,
             NgayLap: req.body.NgayLap,
-            TongTien: req.body.TongTien,
-            TrangThai: req.body.TrangThai
+            ThanhTien: req.body.ThanhTien
+            // TrangThai: req.body.TrangThai
         });
 
         await newOrder.save();
@@ -69,11 +70,16 @@ router.post('/:orderId', async (req, res) => {
             req.params.orderId,
             {
                 $set: {
-                    MaDonHang: req.body.MaDonHang,
+                    // MaDonHang: req.body.MaDonHang,
+                    // MaKH: req.body.MaKH,
+                    // NgayLap: req.body.NgayLap,
+                    // TongTien: req.body.TongTien,
+                    // TrangThai: req.body.TrangThai
+
                     MaKH: req.body.MaKH,
+                    MaSP: req.body.MaSP,
                     NgayLap: req.body.NgayLap,
-                    TongTien: req.body.TongTien,
-                    TrangThai: req.body.TrangThai
+                    ThanhTien: req.body.ThanhTien
                 }
             },
             { useFindAndModify: false }

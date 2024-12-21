@@ -18,15 +18,17 @@
                     <th>Store Name</th>
                     <th>Number of Staffs</th>
                     <th>Address</th>
+                    <th>MaNCC</th>
                     <th>Edit</th>
                 </tr>
             </thead>
-            <% stores.forEach((entry) => { %>
+            <% stores.forEach((entry,key) => { %>
             <tr ondblclick="handleUpdateStore('<%= entry._id %>')">
                 <td><%= entry.MaCH %></td>
                 <td><%= entry.TenCH %></td>
                 <td><%= entry.TongNV %></td>
-                <td><%= entry.DiaChi %></td>
+                <td><%= entry.SoNha %>, <%= entry.Duong %>, Q<%= entry.Quan %>, <%= entry.ThanhPho %></td>
+                <td><%= entry.MaNCC %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
                         onclick="handleUpdateStore('<%= entry._id %>')">

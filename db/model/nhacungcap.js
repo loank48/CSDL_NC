@@ -7,7 +7,7 @@ class NhaCungCap {
             MaNCC: String,
             TenNCC: String,
             SDT: String,
-            DiaChi: String,
+            // DiaChi: String,
             Email: String
         }, { collection: 'NHACUNGCAP' });
 

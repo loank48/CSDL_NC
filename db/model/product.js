@@ -4,17 +4,19 @@ class Product {
     constructor() {
         // Định nghĩa schema
         const productSchema = new mongoose.Schema({
-            MASP: String,
+            MaSP: String,
             TenSP: String,
             MoTaSP: String,
             GiaBan: String,
-            GiaGoc: String,
+            // GiaGoc: String,
             TonKho: Number,
             MaLoai: String,
-            MaChatLieu: String,
-            MaMau: String,
-            MaSize: String,
+            ChatLieu: String,
+            Mau: String,
+            Size: String,
+            MaCH: String,
             UrlImage: String
+            
         }, { collection: 'SANPHAM' }); // Chỉ định collection là SANPHAM
 
         // Khởi tạo model và gán vào thuộc tính của class

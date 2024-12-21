@@ -10,9 +10,15 @@ class NhanVien {
             GioiTinh: String,
             Email: String,
             SDT: String,
-            DiaChi: String,
-            ChucVu: String,
-            Luong: String
+            // DiaChi: {
+                SoNha: String,
+                Duong: String,
+                Quan: String,
+                ThanhPho: String,
+            // },
+            MaCH: String
+            // ChucVu: String,
+            // Luong: String
         }, { collection: 'NHANVIEN' });
 
         // Khởi tạo model và gán vào thuộc tính của class
@@ -27,3 +33,4 @@ class NhanVien {
 
 // Export ra một instance của NhanVien
 module.exports = new NhanVien().getModel();
+

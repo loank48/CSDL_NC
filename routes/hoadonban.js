@@ -26,8 +26,9 @@ router.post('/', async (req, res) => {
             SoLuongBan: req.body.SoLuongBan,
             NgayBan: req.body.NgayBan,
             TongTienThu: req.body.TongTienThu,
-            MaKH: req.body.MaKH,
+            // MaKH: req.body.MaKH,
             MaCH: req.body.MaCH
+
         });
 
         await newSalesInvoice.save();
@@ -74,7 +75,7 @@ router.post('/:salesInvoiceId', async (req, res) => {
                     SoLuongBan: req.body.SoLuongBan,
                     NgayBan: req.body.NgayBan,
                     TongTienThu: req.body.TongTienThu,
-                    MaKH: req.body.MaKH,
+                    // MaKH: req.body.MaKH,
                     MaCH: req.body.MaCH
                 }
             },

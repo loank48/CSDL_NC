@@ -15,20 +15,22 @@
             <thead>
                 <tr>
                     <th>Purchase Invoice ID</th>
+                    <th>Quantity</th>
                     <th>Date</th>
                     <th>Costs</th>
-                    <th>Staff ID</th>
-                    <th>Supplier ID</th>
+                    <!-- <th>Staff ID</th> -->
+                    <th>Store ID</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <% purchaseInvoices.forEach((entry) => { %>
             <tr ondblclick="handleUpdatePurchaseInvoice('<%= entry._id %>')">
                 <td><%= entry.MaHDN %></td>
+                <td><%= entry.SoLuongNhap %></td>
                 <td><%= entry.NgayNhap %></td>
                 <td><%= entry.TongTienTra %></td>
-                <td><%= entry.MaNV %></td>
-                <td><%= entry.MaNCC %></td>
+                <!-- <td><%= entry.MaNV %></td> -->
+                <td><%= entry.MaCH %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
                         onclick="handleUpdatePurchaseInvoice('<%= entry._id %>')">

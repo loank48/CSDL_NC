@@ -28,16 +28,17 @@ router.get('/add-product', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let newProduct = new Product({
-            MASP: req.body.MASP,
+            MaSP: req.body.MaSP,
             TenSP: req.body.TenSP,
+            Mau: req.body.Mau,
+            Size: req.body.Size,
+            ChatLieu: req.body.ChatLieu,
             MoTaSP: req.body.MoTaSP,
             GiaBan: req.body.GiaBan,
-            GiaGoc: req.body.GiaGoc,
             TonKho: req.body.TonKho,
             MaLoai: req.body.MaLoai,
-            MaChatLieu: req.body.MaChatLieu,
-            MaMau: req.body.MaMau,
-            MaSize: req.body.MaSize,
+            MaCH: req.body.MaCH,
+            // GiaGoc: req.body.GiaGoc,
             UrlImage: req.body.UrlImage
         });
 

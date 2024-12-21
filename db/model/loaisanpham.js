@@ -5,8 +5,8 @@ class LoaiSanPham {
         // Định nghĩa schema
         const loaiSanPhamSchema = new mongoose.Schema({
             MaLoai: String,
-            TenLoai: String,
-            MoTaLSP: String
+            TenLoai: String
+            // MoTaLSP: String
         }, { collection: 'LOAISANPHAM' });
 
         // Khởi tạo model và gán vào thuộc tính của class

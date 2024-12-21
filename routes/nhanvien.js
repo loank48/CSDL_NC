@@ -28,9 +28,15 @@ router.post('/', async (req, res) => {
             GioiTinh: req.body.GioiTinh,
             Email: req.body.Email,
             SDT: req.body.SDT,
-            DiaChi: req.body.DiaChi,
-            ChucVu: req.body.ChucVu,
-            Luong: req.body.Luong
+            DiaChi: {
+                SoNha: req.body.SoNha,
+                Duong: req.body.Duong,
+                Quan: req.body.Quan,
+                ThanhPho: req.body.ThanhPho
+            },
+            MaCH: req.body.MaCH
+            // ChucVu: req.body.ChucVu,
+            // Luong: req.body.Luong
         });
 
         await newStaff.save();
@@ -73,15 +79,29 @@ router.post('/:staffId', async (req, res) => {
             req.params.staffId,
             {
                 $set: {
+                    // MaNV: req.body.MaNV,
+                    // TenNV: req.body.TenNV,
+                    // NgaySinh: req.body.NgaySinh,
+                    // GioiTinh: req.body.GioiTinh,
+                    // Email: req.body.Email,
+                    // SDT: req.body.SDT,
+                    // DiaChi: req.body.DiaChi,
+                    // ChucVu: req.body.ChucVu,
+                    // Luong: req.body.Luong
+
                     MaNV: req.body.MaNV,
                     TenNV: req.body.TenNV,
                     NgaySinh: req.body.NgaySinh,
                     GioiTinh: req.body.GioiTinh,
                     Email: req.body.Email,
                     SDT: req.body.SDT,
-                    DiaChi: req.body.DiaChi,
-                    ChucVu: req.body.ChucVu,
-                    Luong: req.body.Luong
+                    DiaChi: {
+                        SoNha: req.body.SoNha,
+                        Duong: req.body.Duong,
+                        Quan: req.body.Quan,
+                        ThanhPho: req.body.ThanhPho
+                    },
+                    MaCH: req.body.MaCH
                 }
             },
             { useFindAndModify: false }

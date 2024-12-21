@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongodb_url = 'mongodb://localhost:27017/CSDL_SHOPQA'
+const mongodb_url = 'mongodb://localhost:27017/CSDL_SHOPQA_1'
 
 class Database {
     constructor() {

@@ -7,7 +7,13 @@ class CuaHang {
             MaCH: String,
             TenCH: String,
             TongNV: Number,
-            DiaChi: String
+            MaNCC: String,
+            // DiaChi: {
+                SoNha: String,
+                Duong: String,
+                Quan: String,
+                ThanhPho: String,
+            // }
         }, { collection: 'CUAHANG' });
 
         // Khởi tạo model và gán vào thuộc tính của class

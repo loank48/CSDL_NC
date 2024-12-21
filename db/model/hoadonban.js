@@ -5,10 +5,10 @@ class HoaDonBan {
         // Định nghĩa schema
         const hoaDonBanSchema = new mongoose.Schema({
             MaHDB: String,
-            SoLuongBan: String,
-            NgayBan: String,
+            SoLuongBan: Number,
+            NgayBan: Date,
             TongTienThu: String,
-            MaKH: String,
+            // MaKH: String,
             MaCH: String
         }, { collection: 'HOADONBAN' });
 

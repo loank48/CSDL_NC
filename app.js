@@ -12,8 +12,8 @@ const loaiSanPhamRoutes = require('./routes/loaisanpham');
 const nhaCungCapRoutes = require('./routes/nhacungcap');
 const nhanVienRoutes = require('./routes/nhanvien');
 const productRoutes = require('./routes/product'); 
-const chiTietHoaDonNhapRoutes = require('./routes/chitiethoadonnhap');
-const chiTietHoaDonBanRoutes = require('./routes/chitiethoadonban');
+// const chiTietHoaDonNhapRoutes = require('./routes/chitiethoadonnhap');
+// const chiTietHoaDonBanRoutes = require('./routes/chitiethoadonban');
 
 // Class Server để quản lý việc khởi động ứng dụng và kết nối cơ sở dữ liệu
 class Server {
@@ -33,7 +33,7 @@ class Server {
 
     // Kết nối đến MongoDB
     connectToDatabase() {
-        mongoose.connect('mongodb://localhost:27017/CSDL_SHOPQA')
+        mongoose.connect('mongodb://localhost:27017/CSDL_SHOPQA_1')
             .then(() => console.log('Database connected successfully!'))
             .catch(err => console.log('Database connection error:', err));
     }
@@ -54,8 +54,8 @@ class Server {
         this.app.use('/nhacungcap', nhaCungCapRoutes);
         this.app.use('/nhanvien', nhanVienRoutes);
         this.app.use('/product', productRoutes);
-        this.app.use('/chitiethoadonnhap', chiTietHoaDonNhapRoutes);
-        this.app.use('/chitiethoadonban', chiTietHoaDonBanRoutes);
+        // this.app.use('/chitiethoadonnhap', chiTietHoaDonNhapRoutes);
+        // this.app.use('/chitiethoadonban', chiTietHoaDonBanRoutes);
     }
 
     // Phương thức khởi động server
