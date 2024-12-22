@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+
 // Import các route
 const cuaHangRoutes = require('./routes/cuahang');
 const donHangRoutes = require('./routes/donhang');
@@ -37,6 +38,8 @@ class Server {
             .then(() => console.log('Database connected successfully!'))
             .catch(err => console.log('Database connection error:', err));
     }
+
+    
 
     // Cấu hình các route
     routes() {
