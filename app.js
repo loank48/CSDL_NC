@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const pasth = require('path');
+const bcrypt = require('bcryptjs');
+const sql = require('mssql');
+const collection = require('./config');
 
 
 // Import các route
@@ -13,7 +17,7 @@ const loaiSanPhamRoutes = require('./routes/loaisanpham');
 const nhaCungCapRoutes = require('./routes/nhacungcap');
 const nhanVienRoutes = require('./routes/nhanvien');
 const productRoutes = require('./routes/product'); 
-// const chiTietHoaDonNhapRoutes = require('./routes/chitiethoadonnhap');
+// const chiTietHoaDonNhapRoutes = require('./routes/user');
 // const chiTietHoaDonBanRoutes = require('./routes/chitiethoadonban');
 
 // Class Server để quản lý việc khởi động ứng dụng và kết nối cơ sở dữ liệu
@@ -28,8 +32,10 @@ class Server {
     // Cấu hình middleware và view engine
     config() {
         this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(express.static('public'));
         this.app.set('view engine', 'ejs');
         this.app.set('views', './views');
+        this.app.use(express.urlencoded({extended: false}));
     }
 
     // Kết nối đến MongoDB
@@ -39,13 +45,46 @@ class Server {
             .catch(err => console.log('Database connection error:', err));
     }
 
-    
-
     // Cấu hình các route
+    // routes() {
+       
+    //     this.app.get('/', (_req, res) => {
+    //         res.render('home');
+    //     });
+
+
     routes() {
-        this.app.get('/', (req, res) => {
-            res.render('home');
+        // Route đăng nhập
+        this.app.get('/login', (req, res) => {
+            res.render('login');
         });
+
+        this.app.post('/login', async (req, res) => {
+            try {
+                const check = await collection.findOne({ name: req.body.username });
+                if (!check) {
+                    res.send("Username cannot found");
+                } 
+            const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
+        if(isPasswordMatch) {
+            res.render("home");
+        }   else {
+            req.send("Wrong password");
+        }
+        } catch {
+            res.redirect('/login');
+            }
+        });
+    
+        // Route chính, kiểm tra đăng nhập
+        // this.app.get('/', (req, res) => {
+        //     const isLoggedIn = req.session && req.session.isLoggedIn; // Kiểm tra trạng thái đăng nhập
+        //     if (isLoggedIn) {
+        //         res.render('home');
+        //     } else {
+        //         res.redirect('/login'); // Chuyển hướng đến trang đăng nhập
+        //     }
+        // });
 
         // Sử dụng các route cho từng collection
         this.app.use('/cuahang', cuaHangRoutes);
