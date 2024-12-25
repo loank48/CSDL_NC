@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/nhacungcap"><h3>Supplier Page</h3></a>
         <h2>UPDATE SUPPLIER</h2>
-        <form action="/nhacungcap/<%= supplier._id %>" method="POST">
+        <form action="/nhacungcap/update/<%= supplier.MaNCC %>" method="POST">
             <div class="form-group">
                 <label>Supplier ID</label>
                 <input class="form-control" type="text" name='MaNCC' value="<%= supplier.MaNCC %>">
@@ -25,16 +25,12 @@
                 <input class="form-control" type="number" name='SDT' value="<%= supplier.SDT %>">
             </div>
             <div class="form-group">
-                <label>Address</label>
-                <input class="form-control" type="text" name='DiaChi' value="<%= supplier.DiaChi %>">
-            </div>
-            <div class="form-group">
                 <label>Email</label>
                 <input class="form-control" type="text" name='Email' value="<%= supplier.Email %>">
             </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteSupplier('<%= supplier._id %>')">
+                onclick="handleDeleteSupplier('<%= supplier.MaNCC %>')">
         </form>
     </div>
     <script>

@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <% customers.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateCustomer('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateCustomer('<%= entry.MaKH %>')">
                 <td><%= entry.MaKH %></td>
                 <td><%= entry.TenKH %></td>
                 <td><%= entry.GioiTinh %></td>
@@ -35,14 +35,14 @@
                 <td><%= entry.SDT %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateCustomer('<%= entry._id %>')">
+                        onclick="handleUpdateCustomer('<%= entry.MaKH %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateCustomer(value) {
-                $(location).attr('href', 'khachhang/update-customer/' + value);
+                $(location).attr('href', 'khachhang/update/' + value);
             }
         </script>
     </div>

@@ -22,13 +22,11 @@
                     <th>Phone Number</th>
                     <th>Address</th>
                     <th>Store ID</th>
-                    <!-- <th>Position</th>
-                    <th>Salary</th> -->
                     <th>Edit</th>
                 </tr>
             </thead>
             <% staffs.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateStaff('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateStaff('<%= entry.MaNV %>')">
                 <td><%= entry.MaNV %></td>
                 <td><%= entry.TenNV %></td>
                 <td><%= entry.NgaySinh %></td>
@@ -37,18 +35,16 @@
                 <td><%= entry.SDT %></td>
                 <td><%= entry.SoNha %>, <%= entry.Duong %>, Q<%= entry.Quan %>, <%= entry.ThanhPho %></td>
                 <td><%= entry.MaCH %></td>
-                <!-- <td><%= entry.ChucVu %></td>
-                <td><%= entry.Luong %></td> -->
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateStaff('<%= entry._id %>')">
+                        onclick="handleUpdateStaff('<%= entry.MaNV %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateStaff(value) {
-                $(location).attr('href', 'nhanvien/update-staff/' + value);
+                $(location).attr('href', 'nhanvien/update/' + value);
             }
         </script>
     </div>

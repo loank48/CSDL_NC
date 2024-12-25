@@ -5,7 +5,7 @@ const NhanVien = require('./../db/model/nhanvien');
 // Home page: loading all staffs
 router.get('/', async (req, res) => {
     try {
-        const staffs = await NhanVien.find({});
+        const staffs = await NhanVien.getAllNhanVien({});
         res.render('nhanvien', { staffs: staffs });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,25 +21,23 @@ router.get('/add-staff', (req, res) => {
 // Add new staff
 router.post('/', async (req, res) => {
     try {
-        let newStaff = new NhanVien({
+        let newStaff = ({
             MaNV: req.body.MaNV,
             TenNV: req.body.TenNV,
             NgaySinh: req.body.NgaySinh,
             GioiTinh: req.body.GioiTinh,
             Email: req.body.Email,
             SDT: req.body.SDT,
-            DiaChi: {
+            // DiaChi: {
                 SoNha: req.body.SoNha,
                 Duong: req.body.Duong,
                 Quan: req.body.Quan,
-                ThanhPho: req.body.ThanhPho
-            },
+                ThanhPho: req.body.ThanhPho,
+            // },
             MaCH: req.body.MaCH
-            // ChucVu: req.body.ChucVu,
-            // Luong: req.body.Luong
         });
 
-        await newStaff.save();
+        await NhanVien.save(newStaff);
         res.redirect('/nhanvien');
     } catch (err) {
         console.log('Error: ', err);
@@ -48,9 +46,11 @@ router.post('/', async (req, res) => {
 });
 
 // Go to Update Staff page
-router.get('/update-staff/:staffId', async (req, res) => {
+router.get('/update/:staffId', async (req, res) => {
     try {
-        const staff = await NhanVien.findById(req.params.staffId);
+        console.log("----------->Run here");
+        
+        const staff = await NhanVien.getNhanVienByID(req.params.staffId);
         if (!staff) {
             return res.status(404).send('Staff not found');
         }
@@ -73,37 +73,24 @@ router.delete('/:staffId', async (req, res) => {
 });
 
 // Update staff
-router.post('/:staffId', async (req, res) => {
+router.post('/update/:staffId', async (req, res) => {
     try {
-        await NhanVien.findByIdAndUpdate(
-            req.params.staffId,
+        await NhanVien.save(
             {
-                $set: {
-                    // MaNV: req.body.MaNV,
-                    // TenNV: req.body.TenNV,
-                    // NgaySinh: req.body.NgaySinh,
-                    // GioiTinh: req.body.GioiTinh,
-                    // Email: req.body.Email,
-                    // SDT: req.body.SDT,
-                    // DiaChi: req.body.DiaChi,
-                    // ChucVu: req.body.ChucVu,
-                    // Luong: req.body.Luong
-
                     MaNV: req.body.MaNV,
                     TenNV: req.body.TenNV,
                     NgaySinh: req.body.NgaySinh,
                     GioiTinh: req.body.GioiTinh,
                     Email: req.body.Email,
                     SDT: req.body.SDT,
-                    DiaChi: {
+                    // DiaChi: {
                         SoNha: req.body.SoNha,
                         Duong: req.body.Duong,
                         Quan: req.body.Quan,
-                        ThanhPho: req.body.ThanhPho
-                    },
+                        ThanhPho: req.body.ThanhPho,
+                    // },
                     MaCH: req.body.MaCH
-                }
-            },
+                },
             { useFindAndModify: false }
         );
         res.redirect('/nhanvien');

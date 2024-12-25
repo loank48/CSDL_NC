@@ -5,7 +5,7 @@ const HoaDonBan = require('./../db/model/hoadonban');
 // Home page: loading all sales invoices
 router.get('/', async (req, res) => {
     try {
-        const salesInvoices = await HoaDonBan.find({});
+        const salesInvoices = await HoaDonBan.getAllHoaDonBan({});
         res.render('hoadonban', { salesInvoices: salesInvoices });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,7 +21,7 @@ router.get('/add-sales-invoice', (req, res) => {
 // Add new Sales Invoice
 router.post('/', async (req, res) => {
     try {
-        let newSalesInvoice = new HoaDonBan({
+        let newSalesInvoice = {
             MaHDB: req.body.MaHDB,
             SoLuongBan: req.body.SoLuongBan,
             NgayBan: req.body.NgayBan,
@@ -29,9 +29,9 @@ router.post('/', async (req, res) => {
             // MaKH: req.body.MaKH,
             MaCH: req.body.MaCH
 
-        });
+        };
 
-        await newSalesInvoice.save();
+        await HoaDonBan.save(newSalesInvoice);
         res.redirect('/hoadonban');
     } catch (err) {
         console.log('Error: ', err);
@@ -40,9 +40,11 @@ router.post('/', async (req, res) => {
 });
 
 // Go to Update Sales Invoice page
-router.get('/update-sales-invoice/:salesInvoiceId', async (req, res) => {
+router.get('/update/:salesInvoiceId', async (req, res) => {
     try {
-        const salesInvoice = await HoaDonBan.findById(req.params.salesInvoiceId);
+        console.log("----------->Run here");
+        
+        const salesInvoice = await HoaDonBan.getHoaDonBanByID(req.params.salesInvoiceId);
         if (!salesInvoice) {
             return res.status(404).send('Sales Invoice not found');
         }
@@ -65,19 +67,16 @@ router.delete('/:salesInvoiceId', async (req, res) => {
 });
 
 // Update Sales Invoice
-router.post('/:salesInvoiceId', async (req, res) => {
+router.post('/update/:salesInvoiceId', async (req, res) => {
     try {
-        await HoaDonBan.findByIdAndUpdate(
-            req.params.salesInvoiceId,
+        await HoaDonBan.save(
             {
-                $set: {
                     MaHDB: req.body.MaHDB,
                     SoLuongBan: req.body.SoLuongBan,
                     NgayBan: req.body.NgayBan,
                     TongTienThu: req.body.TongTienThu,
                     // MaKH: req.body.MaKH,
                     MaCH: req.body.MaCH
-                }
             },
             { useFindAndModify: false }
         );

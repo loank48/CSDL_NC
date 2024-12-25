@@ -5,7 +5,7 @@ const NhaCungCap = require('./../db/model/nhacungcap');
 // Home page: loading all suppliers
 router.get('/', async (req, res) => {
     try {
-        const suppliers = await NhaCungCap.find({});
+        const suppliers = await NhaCungCap.getAllNhaCungCap({});
         res.render('nhacungcap', { suppliers: suppliers });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,15 +21,15 @@ router.get('/add-supplier', (req, res) => {
 // Add new supplier
 router.post('/', async (req, res) => {
     try {
-        let newSupplier = new NhaCungCap({
+        let newSupplier = {
             MaNCC: req.body.MaNCC,
             TenNCC: req.body.TenNCC,
             SDT: req.body.SDT,
             // DiaChi: req.body.DiaChi,
             Email: req.body.Email
-        });
+        };
 
-        await newSupplier.save();
+        await NhaCungCap.save(newSupplier);
         res.redirect('/nhacungcap');
     } catch (err) {
         console.log('Error: ', err);
@@ -38,9 +38,9 @@ router.post('/', async (req, res) => {
 });
 
 // Go to Update Supplier page
-router.get('/update-supplier/:supplierId', async (req, res) => {
+router.get('/update/:supplierId', async (req, res) => {
     try {
-        const supplier = await NhaCungCap.findById(req.params.supplierId);
+        const supplier = await NhaCungCap.getNhaCungCapByID(req.params.supplierId);
         if (!supplier) {
             return res.status(404).send('Supplier not found');
         }
@@ -63,18 +63,15 @@ router.delete('/:supplierId', async (req, res) => {
 });
 
 // Update supplier
-router.post('/:supplierId', async (req, res) => {
+router.post('/update/:supplierId', async (req, res) => {
     try {
-        await NhaCungCap.findByIdAndUpdate(
-            req.params.supplierId,
+        await NhaCungCap.save(
             {
-                $set: {
                     MaNCC: req.body.MaNCC,
                     TenNCC: req.body.TenNCC,
                     SDT: req.body.SDT,
                     // DiaChi: req.body.DiaChi,
                     Email: req.body.Email
-                }
             },
             { useFindAndModify: false }
         );

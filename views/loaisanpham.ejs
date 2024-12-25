@@ -16,25 +16,23 @@
                 <tr>
                     <th>Category ID</th>
                     <th>Category Name</th>
-                    <th>Category Description</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <% categories.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateCategory('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateCategory('<%= entry.MaLoai %>')">
                 <td><%= entry.MaLoai %></td>
                 <td><%= entry.TenLoai %></td>
-                <td><%= entry.MoTaLSP %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateCategory('<%= entry._id %>')">
+                        onclick="handleUpdateCategory('<%= entry.MaLoai %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateCategory(value) {
-                $(location).attr('href', 'loaisanpham/update-category/' + value);
+                $(location).attr('href', 'loaisanpham/update/' + value);
             }
         </script>
     </div>

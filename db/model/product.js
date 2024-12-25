@@ -8,13 +8,9 @@ class Product {
             TenSP: String,
             MoTaSP: String,
             GiaBan: String,
-            // GiaGoc: String,
-            TonKho: Number,
-            MaLoai: String,
             ChatLieu: String,
             Mau: String,
             Size: String,
-            MaCH: String,
             UrlImage: String
             
         }, { collection: 'SANPHAM' }); // Chỉ định collection là SANPHAM

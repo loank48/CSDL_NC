@@ -1,5 +1,11 @@
 const sql = require('mssql');
 
+class Database {
+    constructor() {
+        this._connect()
+    }
+
+    async _connect() {
 // Cấu hình kết nối
 const config = {
   "user": 'sa', // Tên người dùng SQL Server
@@ -12,24 +18,38 @@ const config = {
   },
   "port": 1433, // Cổng kết nối, mặc định là 1433
 };
+        let pool;
 
-// Kết nối đến SQL Server
-async function connectToSqlServer() {
-  try {
-    // Tạo kết nối
-    const pool = await sql.connect(config);
-    console.log('Connected to SQL Server successfully!');
-
-    // // Truy vấn thử
-    // const result = await pool.request().query('SELECT TOP 5 * FROM dbo.CuaHang');
-    // console.log(result.recordset);
-
-    // Đóng kết nối
-    // await pool.close();
-  } 
-  catch (err) {
-    console.error('Error connecting to SQL Server:', err);
-  }
+        try {
+          if (!this.pool) {
+              this.pool = await sql.connect(config);
+          }
+          return this.pool;
+        } catch (err) {
+          console.error('Kết nối SQL Server thất bại:', err);
+          throw err;
+        }
+    }
 }
+module.exports = new Database();
 
-connectToSqlServer();
+
+
+
+// async function connectToSqlServer() {
+//   if (!pool) {
+//       try {
+//           pool = await sql.connect(config);
+//           console.log('Kết nối SQL Server thành công');
+//       } catch (err) {
+//           console.error('Kết nối SQL Server thất bại', err);
+//           throw err;
+//       }
+//   }
+//   return pool;
+// }
+
+// module.exports = {
+//   sql, // Export thư viện sql nếu cần dùng trực tiếp
+//   getConnection,
+// };

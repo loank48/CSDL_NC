@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/hoadonban"><h3>Sales Invoice Page</h3></a>
         <h2>UPDATE SALES INVOICE</h2>
-        <form action="/hoadonban/<%= salesInvoice._id %>" method="POST">
+        <form action="/hoadonban/update/<%= salesInvoice.MaHDB %>" method="POST">
             <div class="form-group">
                 <label>Sales Invoice ID</label>
                 <input class="form-control" type="text" name='MaHDB' value="<%= salesInvoice.MaHDB %>">
@@ -29,16 +29,12 @@
                 <input class="form-control" type="number" name='TongTienThu' value="<%= salesInvoice.TongTienThu %>">
             </div>
             <div class="form-group">
-                <label>Customer ID</label>
-                <input class="form-control" type="text" name='MaKH' value="<%= salesInvoice.MaKH %>">
-            </div>
-            <div class="form-group">
                 <label>Store ID</label>
                 <input class="form-control" type="text" name='MaCH' value="<%= salesInvoice.MaCH %>">
             </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteSalesInvoice('<%= salesInvoice._id %>')">
+                onclick="handleDeleteSalesInvoice('<%= salesInvoice.MaHDB %>')">
         </form>
     </div>
     <script>

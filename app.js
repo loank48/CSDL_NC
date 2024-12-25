@@ -48,34 +48,34 @@ class Server {
     // Cấu hình các route
     // routes() {
        
-    //     this.app.get('/', (_req, res) => {
-    //         res.render('home');
-    //     });
-
-
+    
+    
     routes() {
         // Route đăng nhập
-        this.app.get('/login', (req, res) => {
+        this.app.get('/', (req, res) => {
             res.render('login');
         });
-
+        
         this.app.post('/login', async (req, res) => {
             try {
                 const check = await collection.findOne({ name: req.body.username });
                 if (!check) {
                     res.send("Username cannot found");
                 } 
-            const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
-        if(isPasswordMatch) {
-            res.render("home");
-        }   else {
-            req.send("Wrong password");
-        }
-        } catch {
-            res.redirect('/login');
+                const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
+                if(isPasswordMatch) {
+                    res.render("home");
+                }   else {
+                    req.send("Wrong password");
+                }
+            } catch {
+                res.redirect('/login');
             }
         });
-    
+        
+        // this.app.get('/', (_req, res) => {
+        //     res.render('home');
+        // });
         // Route chính, kiểm tra đăng nhập
         // this.app.get('/', (req, res) => {
         //     const isLoggedIn = req.session && req.session.isLoggedIn; // Kiểm tra trạng thái đăng nhập

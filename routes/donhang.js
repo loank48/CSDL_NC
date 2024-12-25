@@ -5,7 +5,7 @@ const DonHang = require('./../db/model/donhang');
 // Home page: loading all orders
 router.get('/', async (req, res) => {
     try {
-        const orders = await DonHang.find({});
+        const orders = await DonHang.getDonHang({});
         res.render('donhang', { orders: orders });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,16 +21,16 @@ router.get('/add-order', (req, res) => {
 // Add new Order
 router.post('/', async (req, res) => {
     try {
-        let newOrder = new DonHang({
+        let newOrder = {
             // MaDonHang: req.body.MaDonHang,
             MaKH: req.body.MaKH,
             MaSP: req.body.MaSP,
             NgayLap: req.body.NgayLap,
             ThanhTien: req.body.ThanhTien
             // TrangThai: req.body.TrangThai
-        });
+        };
 
-        await newOrder.save();
+        await DonHang.save(newOrder);
         res.redirect('/donhang');
     } catch (err) {
         console.log('Error: ', err);
@@ -39,9 +39,9 @@ router.post('/', async (req, res) => {
 });
 
 // Go to Update Order page
-router.get('/update-order/:orderId', async (req, res) => {
+router.get('/update/:orderId', async (req, res) => {
     try {
-        const order = await DonHang.findById(req.params.orderId);
+        const order = await DonHang.getDonHang(req.params.orderId);
         if (!order) {
             return res.status(404).send('Order not found');
         }
@@ -64,24 +64,15 @@ router.delete('/:orderId', async (req, res) => {
 });
 
 // Update order
-router.post('/:orderId', async (req, res) => {
+router.post('/update/:orderId', async (req, res) => {
     try {
-        await DonHang.findByIdAndUpdate(
-            req.params.orderId,
-            {
-                $set: {
-                    // MaDonHang: req.body.MaDonHang,
-                    // MaKH: req.body.MaKH,
-                    // NgayLap: req.body.NgayLap,
-                    // TongTien: req.body.TongTien,
-                    // TrangThai: req.body.TrangThai
-
+        await DonHang.save(
+        {
                     MaKH: req.body.MaKH,
                     MaSP: req.body.MaSP,
                     NgayLap: req.body.NgayLap,
                     ThanhTien: req.body.ThanhTien
-                }
-            },
+                },
             { useFindAndModify: false }
         );
         res.redirect('/donhang');

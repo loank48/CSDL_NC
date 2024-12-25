@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/loaisanpham"><h3>Category Page</h3></a>
         <h2>UPDATE CATEGORY</h2>
-        <form action="/loaisanpham/<%= category._id %>" method="POST">
+        <form action="/loaisanpham/update/<%= category.MaLoai %>" method="POST">
             <div class="form-group">
                 <label>Category ID</label>
                 <input class="form-control" type="text" name='MaLoai' value="<%= category.MaLoai %>">
@@ -20,13 +20,9 @@
                 <label>Category Name</label>
                 <input class="form-control" type="text" name='TenLoai' value="<%= category.TenLoai %>">
             </div>
-            <div class="form-group">
-                <label>Description</label>
-                <input class="form-control" type="text" name='MoTaLSP' value="<%= category.MoTaLSP %>">
-            </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteCategory('<%= category._id %>')">
+                onclick="handleDeleteCategory('<%= category.MaLoai %>')">
         </form>
     </div>
     <script>

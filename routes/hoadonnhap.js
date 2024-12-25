@@ -5,7 +5,7 @@ const HoaDonNhap = require('./../db/model/hoadonnhap');
 // Home page: loading all purchase invoices
 router.get('/', async (req, res) => {
     try {
-        const purchaseInvoices = await HoaDonNhap.find({});
+        const purchaseInvoices = await HoaDonNhap.getAllHoaDonNhap({});
         res.render('hoadonnhap', { purchaseInvoices: purchaseInvoices });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,16 +21,16 @@ router.get('/add-purchase-invoice', (req, res) => {
 // Add new Purchase Invoice
 router.post('/', async (req, res) => {
     try {
-        let newPurchaseInvoice = new HoaDonNhap({
+        let newPurchaseInvoice = {
             MaHDN: req.body.MaHDN,
             SoLuongNhap: req.body.SoLuongNhap,
             NgayNhap: req.body.NgayNhap,
             TongTienTra: req.body.TongTienTra,
             // MaNV: req.body.MaNV,
             MaCH: req.body.MaCH
-        });
+        };
 
-        await newPurchaseInvoice.save();
+        await HoaDonNhap.save(newPurchaseInvoice);
         res.redirect('/hoadonnhap');
     } catch (err) {
         console.log('Error: ', err);
@@ -39,9 +39,9 @@ router.post('/', async (req, res) => {
 });
 
 // Go to Update Purchase Invoice page
-router.get('/update-purchase-invoice/:purchaseInvoiceId', async (req, res) => {
+router.get('/update/:purchaseInvoiceId', async (req, res) => {
     try {
-        const purchaseInvoice = await HoaDonNhap.findById(req.params.purchaseInvoiceId);
+        const purchaseInvoice = await HoaDonNhap.getHoaDonNhapByID(req.params.purchaseInvoiceId);
         if (!purchaseInvoice) {
             return res.status(404).send('Purchase Invoice not found');
         }
@@ -64,20 +64,17 @@ router.delete('/:purchaseInvoiceId', async (req, res) => {
 });
 
 // Update Purchase Invoice
-router.post('/:purchaseInvoiceId', async (req, res) => {
+router.post('/update/:purchaseInvoiceId', async (req, res) => {
     try {
-        await HoaDonNhap.findByIdAndUpdate(
-            req.params.purchaseInvoiceId,
+        await HoaDonNhap.save(
             {
-                $set: {
                     MaHDN: req.body.MaHDN,
                     SoLuongNhap: req.body.SoLuongNhap,
                     NgayNhap: req.body.NgayNhap,
                     TongTienTra: req.body.TongTienTra,
                     // MaNV: req.body.MaNV,
                     MaCH: req.body.MaCH
-                }
-            },
+                },
             { useFindAndModify: false }
         );
         res.redirect('/hoadonnhap');

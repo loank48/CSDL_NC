@@ -18,12 +18,12 @@
                     <th>Store Name</th>
                     <th>Number of Staffs</th>
                     <th>Address</th>
-                    <th>MaNCC</th>
+                    <th>Supplier ID</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <% stores.forEach((entry,key) => { %>
-            <tr ondblclick="handleUpdateStore('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateStore('<%= entry.MaCH %>')">
                 <td><%= entry.MaCH %></td>
                 <td><%= entry.TenCH %></td>
                 <td><%= entry.TongNV %></td>
@@ -31,14 +31,14 @@
                 <td><%= entry.MaNCC %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateStore('<%= entry._id %>')">
+                        onclick="handleUpdateStore('<%= entry.MaCH %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateStore(value) {
-                $(location).attr('href', 'cuahang/update-store/' + value);
+                $(location).attr('href', 'cuahang/update/' + value);
             }
         </script>
     </div>

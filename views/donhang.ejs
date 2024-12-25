@@ -15,8 +15,13 @@
             <thead>
                 <tr>
                     <!-- <th>Order ID</th> -->
-                    <th>Customer Name</th>
+                    <th>Customer ID</th>
+                    <th>Product ID</th>
                     <th>Product</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Material</th>
+                    <th>Selling Price</th>
                     <th>Date</th>
                     <th>Total Amount</th>
                     <!-- <th>Status</th> -->
@@ -28,8 +33,13 @@
                 <!-- <td><%= entry.MaDonHang %></td> -->
                 <td><%= entry.MaKH %></td>
                 <td><%= entry.MaSP %></td>
+                <td><%= entry.TenSP %></td>
+                <td><%= entry.Mau %></td>
+                <td><%= entry.Size %></td>
+                <td><%= entry.ChatLieu %></td>
+                <td><%= entry.GiaBan %></td>
                 <td><%= entry.NgayLap %></td>
-                <td><%= entry.TongTien %></td>
+                <td><%= entry.ThanhTien %></td>
                 <!-- <td><%= entry.TrangThai %></td> -->
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
@@ -40,7 +50,7 @@
         </table>
         <script>
             function handleUpdateOrder(value) {
-                $(location).attr('href', 'donhang/update-order/' + value);
+                $(location).attr('href', 'donhang/update/' + value);
             }
         </script>
     </div>

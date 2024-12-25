@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/cuahang"><h3>Store Page</h3></a>
         <h2>UPDATE STORE</h2>
-        <form action="/cuahang/<%= store._id %>" method="POST">
+        <form action="/cuahang/update/<%= store.MaCH %>" method="POST">
             <div class="form-group">
                 <label>Store ID</label>
                 <input class="form-control" type="text" name='MaCH' value="<%= store.MaCH %>">
@@ -25,12 +25,29 @@
                 <input class="form-control" type="number" name='TongNV' value="<%= store.TongNV %>">
             </div>
             <div class="form-group">
-                <label>Address</label>
-                <input class="form-control" type="text" name='DiaChi' value="<%= store.DiaChi %>">
+                <label>Number Address</label>
+                <input class="form-control" type="text" name='SoNha' value="<%= store.SoNha %>">
             </div>
+            <div class="form-group">
+                <label>Street</label>
+                <input class="form-control" type="text" name='Duong' value="<%= store.Duong %>">
+            </div>
+            <div class="form-group">
+                <label>District</label>
+                <input class="form-control" type="text" name='Quan' value="<%= store.Quan %>">
+            </div>
+            <div class="form-group">
+                <label>City</label>
+                <input class="form-control" type="text" name='ThanhPho' value="<%= store.ThanhPho %>">
+            </div>
+            <div class="form-group">
+                <label>Suppier ID</label>
+                <input class="form-control" type="text" name='MaNCC' value="<% store.MaNCC %>">
+            </div>
+            
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteStore('<%= store._id %>')">
+                onclick="handleDeleteStore('<%= store.MaCH %>')">
         </form>
     </div>
     <script>

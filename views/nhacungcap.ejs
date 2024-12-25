@@ -17,28 +17,26 @@
                     <th>Supplier ID</th>
                     <th>Supplier Name</th>
                     <th>Phone Number</th>
-                    <th>Address</th>
                     <th>Email</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <% suppliers.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateSupplier('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateSupplier('<%= entry.MaNCC %>')">
                 <td><%= entry.MaNCC %></td>
                 <td><%= entry.TenNCC %></td>
                 <td><%= entry.SDT %></td>
-                <td><%= entry.DiaChi %></td>
                 <td><%= entry.Email %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateSupplier('<%= entry._id %>')">
+                        onclick="handleUpdateSupplier('<%= entry.MaNCC %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateSupplier(value) {
-                $(location).attr('href', 'nhacungcap/update-supplier/' + value);
+                $(location).attr('href', 'nhacungcap/update/' + value);
             }
         </script>
     </div>

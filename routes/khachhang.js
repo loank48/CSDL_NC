@@ -5,7 +5,7 @@ const KhachHang = require('./../db/model/khachhang');
 // Home page: loading all customers
 router.get('/', async (req, res) => {
     try {
-        const customers = await KhachHang.find({});
+        const customers = await KhachHang.getAllKhachHang({});
         res.render('khachhang', { customers: customers });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,7 +21,7 @@ router.get('/add-customer', (req, res) => {
 // Add new Customer
 router.post('/', async (req, res) => {
     try {
-        let newCustomer = new KhachHang({
+        let newCustomer = {
             MaKH: req.body.MaKH,
             TenKH: req.body.TenKH,
             GioiTinh: req.body.GioiTinh,
@@ -29,9 +29,9 @@ router.post('/', async (req, res) => {
             DiaChi: req.body.DiaChi,
             Email: req.body.Email,
             SDT: req.body.SDT
-        });
+        };
 
-        await newCustomer.save();
+        await KhachHang.save(newCustomer);
         res.redirect('/khachhang');
     } catch (err) {
         console.log('Error: ', err);
@@ -40,9 +40,11 @@ router.post('/', async (req, res) => {
 });
 
 // Go to Update Customer page
-router.get('/update-customer/:customerId', async (req, res) => {
+router.get('/update/:customerId', async (req, res) => {
     try {
-        const customer = await KhachHang.findById(req.params.customerId);
+        console.log("----------->Run here");
+
+        const customer = await KhachHang.getKhachHangByID(req.params.customerId);
         if (!customer) {
             return res.status(404).send('Customer not found');
         }
@@ -65,12 +67,10 @@ router.delete('/:customerId', async (req, res) => {
 });
 
 // Update customer
-router.post('/:customerId', async (req, res) => {
+router.post('/update/:customerId', async (req, res) => {
     try {
-        await KhachHang.findByIdAndUpdate(
-            req.params.customerId,
+        await KhachHang.save(
             {
-                $set: {
                     MaKH: req.body.MaKH,
                     TenKH: req.body.TenKH,
                     GioiTinh: req.body.GioiTinh,
@@ -78,7 +78,6 @@ router.post('/:customerId', async (req, res) => {
                     DiaChi: req.body.DiaChi,
                     Email: req.body.Email,
                     SDT: req.body.SDT
-                }
             },
             { useFindAndModify: false }
         );

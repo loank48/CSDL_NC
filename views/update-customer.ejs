@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/khachhang"><h3>Customer Page</h3></a>
         <h2>UPDATE CUSTOMER</h2>
-        <form action="/khachhang/<%= customer._id %>" method="POST">
+        <form action="/khachhang/update/<%= customer.MaKH %>" method="POST">
             <div class="form-group">
                 <label>Customer ID</label>
                 <input class="form-control" type="text" name='MaKH' value="<%= customer.MaKH %>">
@@ -42,7 +42,7 @@
             </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteCustomer('<%= customer._id %>')">
+                onclick="handleDeleteCustomer('<%= customer.MaKH %>')">
         </form>
     </div>
     <script>

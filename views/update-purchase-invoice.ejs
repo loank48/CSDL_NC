@@ -11,10 +11,14 @@
     <div class="container">
         <a href="/hoadonnhap"><h3>Purchase Invoice Page</h3></a>
         <h2>UPDATE PURCHASE INVOICE</h2>
-        <form action="/hoadonnhap/<%= purchaseInvoice._id %>" method="POST">
+        <form action="/hoadonnhap/update/<%= purchaseInvoice.MaHDN %>" method="POST">
             <div class="form-group">
                 <label>Purchase Invoice ID</label>
                 <input class="form-control" type="text" name='MaHDN' value="<%= purchaseInvoice.MaHDN %>">
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input class="form-control" type="number" name='SoLuongNhap' value="<%= purchaseInvoice.SoLuongNhap %>">
             </div>
             <div class="form-group">
                 <label>Date</label>
@@ -25,16 +29,12 @@
                 <input class="form-control" type="number" name='TongTienTra' value="<%= purchaseInvoice.TongTienTra %>">
             </div>
             <div class="form-group">
-                <label>Staff ID</label>
-                <input class="form-control" type="text" name='MaNV' value="<%= purchaseInvoice.MaNV %>">
-            </div>
-            <div class="form-group">
-                <label>Supplier ID</label>
-                <input class="form-control" type="text" name='MaNCC' value="<%= purchaseInvoice.MaNCC %>">
+                <label>Store ID</label>
+                <input class="form-control" type="text" name='MaCH' value="<%= purchaseInvoice.MaCH %>">
             </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeletePurchaseInvoice('<%= purchaseInvoice._id %>')">
+                onclick="handleDeletePurchaseInvoice('<%= purchaseInvoice.MaHDN %>')">
         </form>
     </div>
     <script>

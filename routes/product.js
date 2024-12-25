@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('./../db/model/product');
+const Product = require('./../db/model/sanpham');
 
 /**
  * Home page: loading all products
  */
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.find({});
+        const products = await Product.getAllSanPham({});
         res.render('product', { products: products });
     } catch (err) {
         console.log('Error: ', err);
@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
         });
 
         await newProduct.save();
-        res.redirect('/product');
+        res.redirect('/getdb');
     } catch (err) {
         console.log('Error: ', err);
         res.status(500).send('Internal Server Error');

@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <% salesInvoices.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateSalesInvoice('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateSalesInvoice('<%= entry.MaHDB %>')">
                 <td><%= entry.MaHDB %></td>
                 <td><%= entry.SoLuongBan %></td>
                 <td><%= entry.NgayBan %></td>
@@ -33,14 +33,14 @@
                 <td><%= entry.MaCH %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateSalesInvoice('<%= entry._id %>')">
+                        onclick="handleUpdateSalesInvoice('<%= entry.MaHDB %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateSalesInvoice(value) {
-                $(location).attr('href', '/hoadonban/update-sales-invoice/' + value);
+                $(location).attr('href', '/hoadonban/update/' + value);
             }
         </script>
     </div>

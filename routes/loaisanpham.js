@@ -5,7 +5,7 @@ const LoaiSanPham = require('./../db/model/loaisanpham');
 // Home page: loading all categories
 router.get('/', async (req, res) => {
     try {
-        const categories = await LoaiSanPham.find({});
+        const categories = await LoaiSanPham.getAllLoaiSanPham({});
         res.render('loaisanpham', { categories: categories });
     } catch (err) {
         console.log('Error: ', err);
@@ -21,24 +21,25 @@ router.get('/add-category', (req, res) => {
 // Add new category
 router.post('/', async (req, res) => {
     try {
-        let newCategory = new LoaiSanPham({
+        let newCategory = {
             MaLoai: req.body.MaLoai,
             TenLoai: req.body.TenLoai,
-            // MoTaLSP: req.body.MoTaLSP
-        });
+        };
 
-        await newCategory.save();
+        await LoaiSanPham.save(newCategory);
         res.redirect('/loaisanpham');
     } catch (err) {
-        console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
     }
 });
 
+
 // Go to Update Category page
-router.get('/update-category/:categoryId', async (req, res) => {
+router.get('/update/:categoryId', async (req, res) => {
     try {
-        const category = await LoaiSanPham.findById(req.params.categoryId);
+        console.log("----------->Run here");
+        
+        const category = await LoaiSanPham.getLoaiSanPhamByID(req.params.categoryId);
         if (!category) {
             return res.status(404).send('Category not found');
         }
@@ -61,17 +62,14 @@ router.delete('/:categoryId', async (req, res) => {
 });
 
 // Update category
-router.post('/:categoryId', async (req, res) => {
+router.post('/update/:categoryId', async (req, res) => {
     try {
-        await LoaiSanPham.findByIdAndUpdate(
-            req.params.categoryId,
+        await LoaiSanPham.save(
             {
-                $set: {
                     MaLoai: req.body.MaLoai,
                     TenLoai: req.body.TenLoai,
                     // MoTaLSP: req.body.MoTaLSP
-                }
-            },
+                },
             { useFindAndModify: false }
         );
         res.redirect('/loaisanpham');

@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <% purchaseInvoices.forEach((entry) => { %>
-            <tr ondblclick="handleUpdatePurchaseInvoice('<%= entry._id %>')">
+            <tr ondblclick="handleUpdatePurchaseInvoice('<%= entry.MaHDN %>')">
                 <td><%= entry.MaHDN %></td>
                 <td><%= entry.SoLuongNhap %></td>
                 <td><%= entry.NgayNhap %></td>
@@ -33,14 +33,14 @@
                 <td><%= entry.MaCH %></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdatePurchaseInvoice('<%= entry._id %>')">
+                        onclick="handleUpdatePurchaseInvoice('<%= entry.MaHDN %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdatePurchaseInvoice(value) {
-                $(location).attr('href', '/hoadonnhap/update-purchase-invoice/' + value);
+                $(location).attr('href', '/hoadonnhap/update/' + value);
             }
         </script>
     </div>
