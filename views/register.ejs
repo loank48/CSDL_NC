@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header text-center bg-success text-white">
+                        <h3>Register</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/register" method="POST">
+                            <div>
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            <div>
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <div>
+                                <label for="sdt">Phone Number:</label>
+                                <input type="text" id="sdt" name="sdt" required>
+                            </div>
+                            <div>
+                                <label for="role">Role:</label>
+                                <select id="role" name="role" required>
+                                    <option value="admin">Admin</option>
+                                    <option value="client1">Client 1</option>
+                                    <option value="client2">Client 2</option>
+                                    <option value="client3">Client 3</option>
+                                </select>
+                            </div>
+                            <button type="submit">Register</button>
+                        </form>                        
+                        <hr>
+                        <p class="text-center">
+                            Already have an account? <a href="/login">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

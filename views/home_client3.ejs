@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            margin-bottom: 30px;
+        }
+        .dashboard-title {
+            margin: 20px 0;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Management System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link text-white">Role: <strong><%= user.role %></strong></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <% if (user.role === 'client3') { %>
+            <h1 class="dashboard-title">Client 3 Dashboard</h1>
+            <div class="alert alert-info">
+                <p>Welcome, Client 3. Here is your store data:</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>HOADONBAN</td>
+                                <td><a href="/hoadonban" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>HOADONNHAP</td>
+                                <td><a href="/hoadonnhap" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>NHACUNGCAP</td>
+                                <td><a href="/nhacungcap" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>NHANVIEN</td>
+                                <td><a href="/nhanvien" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>KHACHHANG</td>
+                                <td><a href="/khachhang" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>LOAISANPHAM</td>
+                                <td><a href="/loaisanpham" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>SANPHAM</td>
+                                <td><a href="/product" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>DONHANG</td>
+                                <td><a href="/donhang" class="btn btn-primary btn-sm">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
