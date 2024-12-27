@@ -131,6 +131,4 @@ async delete(MaNCC) {
         }
 }
 
-}
-
 module.exports = new NhaCungCap();

@@ -127,7 +127,7 @@ class HoaDonNhap {
                 }
             }
     }
-}
+
     
 
 module.exports = new HoaDonNhap();

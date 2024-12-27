@@ -24,7 +24,7 @@ class Server {
         this.app = express(); // Tạo instance của Express
         this.config();        // Cấu hình middleware và view engine
         this.routes();        // Cấu hình các route
-        this.connectToDatabase(); // Kết nối cơ sở dữ liệu
+        // this.connectToDatabase(); // Kết nối cơ sở dữ liệu
     }
 
     // Cấu hình middleware và view engine
@@ -47,15 +47,15 @@ class Server {
     }
 
     // Kết nối đến MongoDB
-    connectToDatabase() {
-        mongoose.connect('mongodb://localhost:27017/CSDL_SHOPQA_1', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex:true,
-        })
-            .then(() => console.log('Database connected successfully!'))
-            .catch(err => console.log('Database connection error:', err));
-    }
+    // connectToDatabase() {
+    //     mongoose.connect('mongodb://localhost:27017/CSDL_SHOPQA_1', {
+    //         useNewUrlParser: true,
+    //         useUnifiedTopology: true,
+    //         useCreateIndex:true,
+    //     })
+    //         .then(() => console.log('Database connected successfully!'))
+    //         .catch(err => console.log('Database connection error:', err));
+    // }
 
     // Cấu hình các route
     // routes() {

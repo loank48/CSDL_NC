@@ -52,11 +52,35 @@ class DonHang {
     async getDonHangByID(MaKH) {
             try {
                 const pool = await sql._connect();
-                const result = await pool
+                const resultMSSQL = await pool
                     .request()
                     .input('MaKH', MaKH)
-                    .query('SELECT * FROM dbo.DonHang WHERE MaKH = @MaKH');
-                return result.recordset[0]; // Trả về thông tin nhân viên đầu tiên
+                    .input('MaSP', MaSP)
+                    .query('SELECT * FROM dbo.DonHang WHERE MaKH = @MaKH & MaSP = @MaSP');
+                    if (resultMSSQL.recordset.length === 0) {
+                        throw new Error('Không tìm thấy sản phẩm trong MSSQL');
+                    }
+                    const { NgayLap, ThanhTien } = resultMSSQL.recordset[0];
+                    const resultMongoDB = await product.findOne({ MaSP });
+
+                    if (!resultMongoDB) {
+                        throw new Error('Không tìm thấy sản phẩm trong MongoDB');
+                    }
+
+                    // Kết hợp dữ liệu từ MSSQL và MongoDB
+                    const donHang = {
+                        MaKH,
+                        MaSP,
+                        NgayLap,
+                        TenSP: resultMongoDB.TenSP,
+                        Mau: resultMongoDB.Mau,
+                        Size: resultMongoDB.Size,
+                        ChatLieu: resultMongoDB.ChatLieu,
+                        GiaBan: resultMongoDB.GiaBan,
+                        ThanhTien,
+                    };
+                    
+                    return donHang;
             } catch (err) {
                 console.error(`Lỗi khi lấy khách hàng có mã ${MaKH}:`, err);
                 throw err;
@@ -120,6 +144,34 @@ class DonHang {
         } catch (err) {
             console.error('Lỗi khi xử lý đơn hàng:', err);
             throw err;
+        }
+    }
+    async deleteDonHang(MaKH) {
+        try {
+            // 1. Xóa dữ liệu từ MSSQL
+            const pool = await sql._connect(); // Kết nối với MSSQL
+            const deleteMSSQLQuery = `DELETE FROM dbo.DonHang WHERE MaKH = @MaKH`;
+            const deleteRequest = pool.request();
+            deleteRequest.input('MaKH', MaKHKH);
+            const mssqlResult = await deleteRequest.query(deleteMSSQLQuery);
+    
+            // Kiểm tra xem sản phẩm có tồn tại trong MSSQL không
+            if (mssqlResult.rowsAffected[0] === 0) {
+                throw new Error('Sản phẩm không tồn tại trong MSSQL.');
+            }
+    
+            // 2. Xóa dữ liệu từ MongoDB
+            const mongoResult = await product.deleteOne({ MaKH });
+    
+            // Kiểm tra xem sản phẩm có tồn tại trong MongoDB không
+            if (mongoResult.deletedCount === 0) {
+                throw new Error('Sản phẩm không tồn tại trong MongoDB.');
+            }
+    
+            return { success: true, message: 'Xóa sản phẩm thành công từ cả MSSQL và MongoDB.' };
+        } catch (err) {
+            console.error('Lỗi khi xóa sản phẩm:', err);
+            throw new Error('Lỗi khi xóa sản phẩm từ cơ sở dữ liệu.');
         }
     }
 }

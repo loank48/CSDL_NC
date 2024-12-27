@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/donhang"><h3>Order Page</h3></a>
         <h2>UPDATE ORDER</h2>
-        <form action="/donhang/<%= order.MaKH %>" method="POST">
+        <form action="/donhang/update<%= order.MaKH %>" method="POST">
             <div class="form-group">
                 <label>Customer ID</label>
                 <input class="form-control" type="text" name='MaKH' value="<%= order.MaKH %>">

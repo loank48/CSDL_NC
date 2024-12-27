@@ -74,43 +74,16 @@ router.post('/update/:productID', async (req, res) => {
                         }
                     });
                 
-/**
- * Delete product
- */
-// router.delete('/:productId', async (req, res) => {
-//     try {
-//         const doc = await Product.deleteProduct(req.params.productId);
-//         res.send(doc);
-//     } catch (err) {
-//         console.log('Error: ', err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
+router.delete('/:MaSP', async (req, res) => {
+    try {
+        const { MaSP } = req.params; // Lấy mã sản phẩm từ URL
+        const result = await Product.deleteProduct(MaSP); // Gọi hàm deleteProduct
+        res.status(200).json({ success: true, message: 'Product deleted successfully' }); // Trả về phản hồi JSON
 
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message }); // Trả về lỗi nếu xảy ra
+    }
+});
 
-// router.post('/:productId', async (req, res) => {
-//     try {
-//         await Product.findByIdAndUpdate(
-//             {
-//                     MaSP: req.body.MaSP,
-//                     TenSP: req.body.TenSP,
-//                     MoTaSP: req.body.MoTaSP,
-//                     GiaBan: req.body.GiaBan,
-//                     GiaGoc: req.body.GiaGoc,
-//                     TonKho: req.body.TonKho,
-//                     MaLoai: req.body.MaLoai,
-//                     MaChatLieu: req.body.MaChatLieu,
-//                     MaMau: req.body.MaMau,
-//                     MaSize: req.body.MaSize,
-//                     UrlImage: req.body.UrlImage
-//             },
-//             { useFindAndModify: false }
-//         );
-//         res.redirect('/product');
-//     } catch (err) {
-//         console.log('Error: ', err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
  
 module.exports = router;
