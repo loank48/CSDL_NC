@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <% products.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateProduct('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateProduct('<%= entry.MaSP %>')">
                 <td><%= entry.MaSP %></td>
                 <td><%= entry.TenSP %></td>
                 <td><%= entry.Mau %></td>
@@ -38,21 +38,20 @@
                 <td><%= entry.ChatLieu %></td>
                 <td><%= entry.MoTaSP %></td>
                 <td><%= entry.GiaBan %></td>
-                <!-- <td><%= entry.GiaGoc %></td> -->
                 <td><%= entry.TonKho %></td>
                 <td><%= entry.MaLoai %></td>
                 <td><%= entry.MaCH %></td>
                 <td><img src="<%= entry.UrlImage %>" alt="<%= entry.UrlImage %>" style="max-width: 100px;"/></td>
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateProduct('<%= entry._id %>')">
+                        onclick="handleUpdateProduct('<%= entry.MaSP %>')">
                 </td>
             </tr>
             <% }) %>
         </table>
         <script>
             function handleUpdateProduct(value) {
-                $(location).attr('href', 'product/update-product/' + value);
+                $(location).attr('href', 'product/update/' + value);
             }
         </script>
     </div>

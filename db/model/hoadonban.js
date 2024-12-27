@@ -88,6 +88,45 @@ class HoaDonBan {
             throw err;
         }
     }
+    async delete(MaHDB) {
+            try {
+                const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+        
+                // Kiểm tra xem bản ghi có tồn tại không
+                const checkQuery = `
+                    SELECT COUNT(*) AS count 
+                    FROM dbo.HoaDonBan 
+                    WHERE MaHDB = @MaHDB
+                `;
+                const checkResult = await pool.request()
+                    .input('MaBDB', MaHDB) // Đảm bảo kiểu dữ liệu phù hợp
+                    .query(checkQuery);
+        
+                const count = checkResult.recordset[0].count;
+        
+                if (count === 0) {
+                    return { success: false, message: `Không tìm thấy HDB với mã ${MaHDB}` };
+                }
+        
+                // Thực hiện xóa bản ghi
+                const deleteQuery = `
+                    DELETE FROM dbo.HoaDonBan 
+                    WHERE MaHDB = @MaHDB
+                `;
+                const deleteResult = await pool.request()
+                    .input('MaHDB', MaHDB)
+                    .query(deleteQuery);
+        
+                return {
+                    success: true,
+                    message: `Đã xóa thành công HDB với mã ${MaHDB}`,
+                    rowsAffected: deleteResult.rowsAffected,
+                };
+            } catch (err) {
+                console.error(`Lỗi khi xóa HDB có mã ${MaHDB}:`, err);
+                throw err;
+            }
+        }
 }
 
 module.exports = new HoaDonBan();

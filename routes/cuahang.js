@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
 // Go to Update Store page
 router.get('/update/:storeId', async (req, res) => {
     try {
-        console.log("----------->Run here");
+        // console.log("----------->Run here");
 
         const store = await CuaHang.getCuaHangByMaCH(req.params.storeId);
         if (!store) {
@@ -58,39 +58,48 @@ router.get('/update/:storeId', async (req, res) => {
     }
 });
 
-// Delete store
-router.delete('/:storeId', async (req, res) => {
-    try {
-        const doc = await CuaHang.findByIdAndDelete(req.params.storeId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
 
 // Update store
 router.post('/update/:storeId', async (req, res) => {
     try {
         await CuaHang.save(
             {
-                    MaCH: req.body.MaCH,
-                    TenCH: req.body.TenCH,
-                    TongNV: req.body.TongNV,
-                    MaNCC: req.body.MaNCC,
-                    // DiaChi: {
-                        SoNha: req.body.SoNha,
-                        Duong: req.body.Duong,
-                        Quan: req.body.Quan,
-                        ThanhPho: req.body.ThanhPho
+                MaCH: req.body.MaCH,
+                TenCH: req.body.TenCH,
+                TongNV: req.body.TongNV,
+                MaNCC: req.body.MaNCC,
+                // DiaChi: {
+                    SoNha: req.body.SoNha,
+                    Duong: req.body.Duong,
+                    Quan: req.body.Quan,
+                    ThanhPho: req.body.ThanhPho
                     // }
-            },
-            { useFindAndModify: false }
-        );
-        res.redirect('/cuahang');
-    } catch (err) {
-        console.log('Error: ', err);
+                },
+                { useFindAndModify: false }
+            );
+            res.redirect('/cuahang');
+        } catch (err) {
+            console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
+    }
+});
+
+
+// Delete store
+router.post('/:storeId', async (req, res) => {
+    try {
+        const storeId = req.params.storeId; // Lấy storeId từ URL
+        const result = await CuaHang.delete(storeId); // Gọi hàm xóa trong model
+        
+        if (result.rowsAffected.length > 0) {
+            res.redirect('/cuahang');
+            // res.status(200).send({ success: true, message: `Cửa hàng với mã ${storeId} đã bị xóa.` });
+        } else {
+            res.status(404).send({ success: false, message: `Không tìm thấy cửa hàng với mã ${storeId}.` });
+        }
+        
+    } catch (err) {
+        res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa cửa hàng.' });
     }
 });
 

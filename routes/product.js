@@ -27,23 +27,9 @@ router.get('/add-product', (req, res) => {
  */
 router.post('/', async (req, res) => {
     try {
-        let newProduct = new Product({
-            MaSP: req.body.MaSP,
-            TenSP: req.body.TenSP,
-            Mau: req.body.Mau,
-            Size: req.body.Size,
-            ChatLieu: req.body.ChatLieu,
-            MoTaSP: req.body.MoTaSP,
-            GiaBan: req.body.GiaBan,
-            TonKho: req.body.TonKho,
-            MaLoai: req.body.MaLoai,
-            MaCH: req.body.MaCH,
-            // GiaGoc: req.body.GiaGoc,
-            UrlImage: req.body.UrlImage
-        });
-
-        await newProduct.save();
-        res.redirect('/getdb');
+        const data = req.body;
+        const result = await Product.saveProduct(data);
+        res.redirect('/product');
     } catch (err) {
         console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
@@ -53,9 +39,9 @@ router.post('/', async (req, res) => {
 /**
  * Go to Update Product page
  */
-router.get('/update-product/:productId', async (req, res) => {
+router.get('/update/:productID', async (req, res) => {
     try {
-        const product = await Product.findById(req.params.productId);
+        const product = await Product.getSanPhamByMaSP(req.params.productID);
         if (!product) {
             return res.status(404).send('Product not found');
         }
@@ -65,49 +51,76 @@ router.get('/update-product/:productId', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-/**
- * Delete product
- */
-router.delete('/:productId', async (req, res) => {
+//Update product
+router.post('/update/:productID', async (req, res) => {
     try {
-        const doc = await Product.findByIdAndDelete(req.params.productId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-/**
- * Update product
- */
-router.post('/:productId', async (req, res) => {
-    try {
-        await Product.findByIdAndUpdate(
-            req.params.productId,
-            {
-                $set: {
-                    MASP: req.body.MASP,
-                    TenSP: req.body.TenSP,
-                    MoTaSP: req.body.MoTaSP,
-                    GiaBan: req.body.GiaBan,
-                    GiaGoc: req.body.GiaGoc,
-                    TonKho: req.body.TonKho,
-                    MaLoai: req.body.MaLoai,
-                    MaChatLieu: req.body.MaChatLieu,
-                    MaMau: req.body.MaMau,
-                    MaSize: req.body.MaSize,
-                    UrlImage: req.body.UrlImage
-                }
-            },
-            { useFindAndModify: false }
-        );
+        let newProduct = {
+                MaSP: req.body.MaSP,
+                TenSP: req.body.TenSP,
+                MoTaSP: req.body.MoTaSP,
+                GiaBan: req.body.GiaBan,
+                TonKho: req.body.TonKho,
+                MaLoai: req.body.MaLoai,
+                ChatLieu: req.body.ChatLieu,
+                Mau: req.body.Mau,
+                Size: req.body.Size,
+                UrlImage: req.body.UrlImage
+        }; 
+        await Product.saveProduct(newProduct);
         res.redirect('/product');
     } catch (err) {
         console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
+            res.status(500).send('Internal Server Error');
+                        }
+                    });
+                
+/**
+ * Delete product
+ */
+// router.delete('/:productId', async (req, res) => {
+//     try {
+//         const doc = await Product.deleteProduct(req.params.productId);
+//         res.send(doc);
+//     } catch (err) {
+//         console.log('Error: ', err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
+
+router.delete('/:MaSP', async (req, res) => {
+    try {
+        const { MaSP } = req.params; // Lấy mã sản phẩm từ URL
+        const result = await Product.deleteProduct(MaSP); // Gọi hàm deleteProduct
+        res.status(200).json({ success: true, message: 'Product deleted successfully' }); // Trả về phản hồi JSON
+
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message }); // Trả về lỗi nếu xảy ra
     }
 });
+
+// router.post('/:productId', async (req, res) => {
+//     try {
+//         await Product.findByIdAndUpdate(
+//             {
+//                     MaSP: req.body.MaSP,
+//                     TenSP: req.body.TenSP,
+//                     MoTaSP: req.body.MoTaSP,
+//                     GiaBan: req.body.GiaBan,
+//                     GiaGoc: req.body.GiaGoc,
+//                     TonKho: req.body.TonKho,
+//                     MaLoai: req.body.MaLoai,
+//                     MaChatLieu: req.body.MaChatLieu,
+//                     MaMau: req.body.MaMau,
+//                     MaSize: req.body.MaSize,
+//                     UrlImage: req.body.UrlImage
+//             },
+//             { useFindAndModify: false }
+//         );
+//         res.redirect('/product');
+//     } catch (err) {
+//         console.log('Error: ', err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 module.exports = router;

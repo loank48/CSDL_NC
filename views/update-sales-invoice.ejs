@@ -41,9 +41,9 @@
         function handleDeleteSalesInvoice(value) {
             $.ajax({
                 url: '/hoadonban/' + value,
-                type: 'DELETE',
+                type: 'POST',
                 success: function (result) {
-                    $(location).attr('href', '/');
+                    $(location).attr('href', '/hoadonban');
                 }
             })
         }

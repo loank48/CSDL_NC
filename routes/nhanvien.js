@@ -21,7 +21,7 @@ router.get('/add-staff', (req, res) => {
 // Add new staff
 router.post('/', async (req, res) => {
     try {
-        let newStaff = ({
+        let newStaff = {
             MaNV: req.body.MaNV,
             TenNV: req.body.TenNV,
             NgaySinh: req.body.NgaySinh,
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
                 ThanhPho: req.body.ThanhPho,
             // },
             MaCH: req.body.MaCH
-        });
+        };
 
         await NhanVien.save(newStaff);
         res.redirect('/nhanvien');
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 // Go to Update Staff page
 router.get('/update/:staffId', async (req, res) => {
     try {
-        console.log("----------->Run here");
+        // console.log("----------->Run here");
         
         const staff = await NhanVien.getNhanVienByID(req.params.staffId);
         if (!staff) {

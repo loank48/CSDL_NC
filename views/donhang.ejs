@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <% orders.forEach((entry) => { %>
-            <tr ondblclick="handleUpdateOrder('<%= entry._id %>')">
+            <tr ondblclick="handleUpdateOrder('<%= entry.MaKH %>')">
                 <!-- <td><%= entry.MaDonHang %></td> -->
                 <td><%= entry.MaKH %></td>
                 <td><%= entry.MaSP %></td>
@@ -43,7 +43,7 @@
                 <!-- <td><%= entry.TrangThai %></td> -->
                 <td>
                     <input class="btn btn-primary" type="button" value="Update"
-                        onclick="handleUpdateOrder('<%= entry._id %>')">
+                        onclick="handleUpdateOrder('<%= entry.MaKH %>')">
                 </td>
             </tr>
             <% }) %>

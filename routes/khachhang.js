@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
 // Go to Update Customer page
 router.get('/update/:customerId', async (req, res) => {
     try {
-        console.log("----------->Run here");
+        // console.log("----------->Run here");
 
         const customer = await KhachHang.getKhachHangByID(req.params.customerId);
         if (!customer) {

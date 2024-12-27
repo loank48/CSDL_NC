@@ -11,14 +11,14 @@
     <div class="container">
         <a href="/donhang"><h3>Order Page</h3></a>
         <h2>UPDATE ORDER</h2>
-        <form action="/donhang/<%= order.MaKH:order.MaSP %>" method="POST">
+        <form action="/donhang/<%= order.MaKH %>" method="POST">
             <div class="form-group">
                 <label>Customer ID</label>
                 <input class="form-control" type="text" name='MaKH' value="<%= order.MaKH %>">
             </div>
             <div class="form-group">
                 <label>Product ID</label>
-                <input class="form-control" type="text" name='MaDonHang' value="<%= order.MaSP %>">
+                <input class="form-control" type="text" name='MaSP' value="<%= order.MaSP %>">
             </div>
             <div class="form-group">
                 <label>Date</label>
@@ -28,10 +28,9 @@
                 <label>Total Amount</label>
                 <input class="form-control" type="number" name='ThanhTien' value="<%= order.ThanhTien %>">
             </div>
-            </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="delete-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteOrder('<%= order._id %>')">
+                onclick="handleDeleteOrder('<%= order.MaKH %>')">
         </form>
     </div>
     <script>

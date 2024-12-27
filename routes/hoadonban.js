@@ -42,24 +42,13 @@ router.post('/', async (req, res) => {
 // Go to Update Sales Invoice page
 router.get('/update/:salesInvoiceId', async (req, res) => {
     try {
-        console.log("----------->Run here");
+        // console.log("----------->Run here");
         
         const salesInvoice = await HoaDonBan.getHoaDonBanByID(req.params.salesInvoiceId);
         if (!salesInvoice) {
             return res.status(404).send('Sales Invoice not found');
         }
         res.render('update-sales-invoice', { salesInvoice: salesInvoice });
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-// Delete Sales Invoice
-router.delete('/:salesInvoiceId', async (req, res) => {
-    try {
-        const doc = await HoaDonBan.findByIdAndDelete(req.params.salesInvoiceId);
-        res.send(doc);
     } catch (err) {
         console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
@@ -86,5 +75,24 @@ router.post('/update/:salesInvoiceId', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// Delete HDB
+router.post('/:salesInvoiceId', async (req, res) => {
+    try {
+        const salesInvoiceId = req.params.salesInvoiceId; // Lấy storeId từ URL
+        const result = await HoaDonBan.delete(salesInvoiceId); // Gọi hàm xóa trong model
+        
+        if (result.rowsAffected.length > 0) {
+            res.redirect('/hoadonban');
+            // res.status(200).send({ success: true, message: `HDB với mã ${salesInvoiceId} đã bị xóa.` });
+        } else {
+            res.status(404).send({ success: false, message: `Không tìm thấy HDB với mã ${salesInvoiceId}.` });
+        }
+        
+    } catch (err) {
+        res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa HDB.' });
+    }
+});
+
 
 module.exports = router;

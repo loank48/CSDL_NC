@@ -13,10 +13,10 @@
             <h3>Product Page</h3>
         </a>
         <h2>UPDATE PRODUCT</h2>
-        <form action="/product/<%= product._id %>" method="POST">
+        <form action="/product/update/<%= product.MaSP %>" method="POST">
             <div class="form-group">
                 <label>Product ID</label>
-                <input class="form-control" type="text" name='MASP' value="<%= product.MASP %>" disabled>
+                <input class="form-control" type="text" name='MaSP' value="<%= product.MaSP %>" >
             </div>
             <div class="form-group">
                 <label>Product Name</label>
@@ -24,15 +24,15 @@
             </div>
             <div class="form-group">
                 <label>Color</label>
-                <input class="form-control" type="text" name='MaMau' value="<%= product.MaMau %>">
+                <input class="form-control" type="text" name='Mau' value="<%= product.Mau %>">
             </div>
             <div class="form-group">
                 <label>Size</label>
-                <input class="form-control" type="text" name='MaSize' value="<%= product.MaSize %>">
+                <input class="form-control" type="text" name='Size' value="<%= product.Size %>">
             </div>
             <div class="form-group">
                 <label>Material</label>
-                <input class="form-control" type="text" name='MaChatLieu' value="<%= product.MaChatLieu %>">
+                <input class="form-control" type="text" name='ChatLieu' value="<%= product.ChatLieu %>">
             </div>
             <div class="form-group">
                 <label>Description</label>
@@ -42,29 +42,25 @@
                 <label>Selling Price</label>
                 <input class="form-control" type="text" name='GiaBan' value="<%= product.GiaBan %>">
             </div>
-            <!-- <div class="form-group">
-                <label>Original Price</label>
-                <input class="form-control" type="text" name='GiaGoc' value="<%= product.GiaGoc %>">
-            </div> -->
             <div class="form-group">
                 <label>Stock</label>
                 <input class="form-control" type="number" name='TonKho' value="<%= product.TonKho %>">
             </div>
             <div class="form-group">
-                <label>Category</label>
+                <label>Category ID</label>
                 <input class="form-control" type="text" name='MaLoai' value="<%= product.MaLoai %>">
             </div>
             <div class="form-group">
-                <label>Store</label>
+                <label>Store ID</label>
                 <input class="form-control" type="text" name='MaCH' value="<%= product.MaCH %>">
             </div>
             <div class="form-group">
-                <label>URL</label>
-                <input class="form-control" type="text" name='MaSize' value="<%= product.UrlImage %>">
+                <label>Image</label>
+                <input class="form-control" type="text" name='UrlImage' value="<%= product.UrlImage %>">
             </div>
             <input id="update-btn" class="btn btn-primary" type="submit" value="SAVE">
             <input id="update-btn" class="btn btn-secondary" type="button" value="DELETE"
-                onclick="handleDeleteProduct('<%= product._id %>')">
+                onclick="handleDeleteProduct('<%= product.MaSP %>')">
         </form>
     </div>
     <script>
@@ -73,7 +69,7 @@
                 url: '/product/' + value,
                 type: 'DELETE',
                 success: function (result) {
-                    $(location).attr('href', '/');
+                    $(location).attr('href', '/product');
                 }
             })
         }

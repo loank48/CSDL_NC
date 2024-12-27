@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 // Go to Update Category page
 router.get('/update/:categoryId', async (req, res) => {
     try {
-        console.log("----------->Run here");
+        // console.log("----------->Run here");
         
         const category = await LoaiSanPham.getLoaiSanPhamByID(req.params.categoryId);
         if (!category) {

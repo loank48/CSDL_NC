@@ -106,7 +106,50 @@ async save(data) {
         throw err;
     }
 }
+
+    //Delete
+    async delete(MaCH) {
+        try {
+            const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+    
+            // Kiểm tra xem bản ghi có tồn tại không
+            const checkQuery = `
+                SELECT COUNT(*) AS count 
+                FROM dbo.CuaHang 
+                WHERE MaCH = @MaCH
+            `;
+            const checkResult = await pool.request()
+                .input('MaCH', MaCH) // Đảm bảo kiểu dữ liệu phù hợp
+                .query(checkQuery);
+    
+            const count = checkResult.recordset[0].count;
+    
+            if (count === 0) {
+                return { success: false, message: `Không tìm thấy cửa hàng với mã ${MaCH}` };
+            }
+    
+            // Thực hiện xóa bản ghi
+            const deleteQuery = `
+                DELETE FROM dbo.CuaHang 
+                WHERE MaCH = @MaCH
+            `;
+            const deleteResult = await pool.request()
+                .input('MaCH', MaCH)
+                .query(deleteQuery);
+    
+            return {
+                success: true,
+                message: `Đã xóa thành công cửa hàng với mã ${MaCH}`,
+                rowsAffected: deleteResult.rowsAffected,
+            };
+        } catch (err) {
+            console.error(`Lỗi khi xóa cửa hàng có mã ${MaCH}:`, err);
+            throw err;
+        }
+    }
+    
 }
+
 
 module.exports = new CuaHang();
 

@@ -53,10 +53,10 @@
     <script>
         function handleDeleteStore(value) {
             $.ajax({
-                url: '/cuahang/' + value,
-                type: 'DELETE',
+                url: "/cuahang/" + value,
+                type: 'POST',
                 success: function (result) {
-                    $(location).attr('href', '/');
+                    $(location).attr('href', '/cuahang');
                 }
             })
         }

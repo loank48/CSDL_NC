@@ -1,4 +1,5 @@
 const sql = require('../connect');
+const mongoose = require('mongoose'); // Kết nối với MongoDB
 const product = require('./product');
 
 class DonHang {
@@ -85,7 +86,7 @@ class DonHang {
                 const updateQuery = `
                     UPDATE dbo.KhachHang
                     SET MaSP = @MaSP, NgayLap = @NgayLap, ThanhTien = @ThanhTien
-                    WHERE MaNV = @MaKH
+                    WHERE MaKH = @MaKH
                 `;
                 const updateRequest = pool.request();
                 updateRequest.input('MaKH', data.MaKH);

@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
 // Go to Update Order page
 router.get('/update/:orderId', async (req, res) => {
     try {
-        const order = await DonHang.getDonHang(req.params.orderId);
+        const order = await DonHang.getDonHangByID(req.params.orderId);
         if (!order) {
             return res.status(404).send('Order not found');
         }
