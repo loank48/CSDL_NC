@@ -97,6 +97,45 @@ class LoaiSanPham {
         throw err;
     }
 }
+    async delete(MaLoai) {
+                try {
+                    const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+            
+                    // Kiểm tra xem bản ghi có tồn tại không
+                    const checkQuery = `
+                        SELECT COUNT(*) AS count 
+                        FROM dbo.LoaiSanPham
+                        WHERE MaLoai = @MaLoai 
+                    `;
+                    const checkResult = await pool.request()
+                        .input('MaLoai', MaLoai) // Đảm bảo kiểu dữ liệu phù hợp
+                        .query(checkQuery);
+            
+                    const count = checkResult.recordset[0].count;
+            
+                    if (count === 0) {
+                        return { success: false, message: `Không tìm thấy loại sản phẩmphẩm với mã ${MaLoai}` };
+                    }
+            
+                    // Thực hiện xóa bản ghi
+                    const deleteQuery = `
+                        DELETE FROM dbo.LoaiSanPham
+                        WHERE MaLoai = @MaLoai 
+                    `;
+                    const deleteResult = await pool.request()
+                        .input('MaLoai', MaLoai)
+                        .query(deleteQuery);
+            
+                    return {
+                        success: true,
+                        message: `Đã xóa thành công loại sản phẩm với mã ${MaLoai}`,
+                        rowsAffected: deleteResult.rowsAffected,
+                    };
+                } catch (err) {
+                    console.error(`Lỗi khi xóa loại sản phẩm có mã ${MaLoai}:`, err);
+                    throw err;
+                }
+            }
 }
             // Câu truy vấn SQL để thêm dữ liệu vào bảng LoaiSanPham
             // const query = `

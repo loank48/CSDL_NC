@@ -90,6 +90,47 @@ class NhaCungCap {
         throw err;
     }
 }
+async delete(MaNCC) {
+            try {
+                const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+        
+                // Kiểm tra xem bản ghi có tồn tại không
+                const checkQuery = `
+                    SELECT COUNT(*) AS count 
+                    FROM dbo.NhaCungCap 
+                    WHERE MaNCC = @MaNCC
+                `;
+                const checkResult = await pool.request()
+                    .input('MaNCC', MaNCC) // Đảm bảo kiểu dữ liệu phù hợp
+                    .query(checkQuery);
+        
+                const count = checkResult.recordset[0].count;
+        
+                if (count === 0) {
+                    return { success: false, message: `Không tìm thấy nhà cung cấp với mã ${MaNCC}` };
+                }
+        
+                // Thực hiện xóa bản ghi
+                const deleteQuery = `
+                    DELETE FROM dbo.NhaCungCap
+                    WHERE MaNCC = @MaNCC
+                `;
+                const deleteResult = await pool.request()
+                    .input('MaNCC', MaNCC)
+                    .query(deleteQuery);
+        
+                return {
+                    success: true,
+                    message: `Đã xóa thành công nhà cung cấp với mã ${MaNCC}`,
+                    rowsAffected: deleteResult.rowsAffected,
+                };
+            } catch (err) {
+                console.error(`Lỗi khi xóa nhà cung cấp có mã ${MaNCC}:`, err);
+                throw err;
+            }
+        }
+}
+
 }
 
 module.exports = new NhaCungCap();

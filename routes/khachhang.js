@@ -55,17 +55,6 @@ router.get('/update/:customerId', async (req, res) => {
     }
 });
 
-// Delete customer
-router.delete('/:customerId', async (req, res) => {
-    try {
-        const doc = await KhachHang.findByIdAndDelete(req.params.customerId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 // Update customer
 router.post('/update/:customerId', async (req, res) => {
     try {
@@ -85,6 +74,24 @@ router.post('/update/:customerId', async (req, res) => {
     } catch (err) {
         console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
+    }
+});
+
+// Delete customer
+router.post('/:customerId', async (req, res) => {
+    try {
+        const customerId = req.params.customerId; // Lấy customerId từ URL
+        const result = await KhachHang.delete(customerId); // Gọi hàm xóa trong model
+        
+        if (result.rowsAffected.length > 0) {
+            res.redirect('/khachhang');
+            // res.status(200).send({ success: true, message: `KH với mã ${customerId} đã bị xóa.` });
+        } else {
+            res.status(404).send({ success: false, message: `Không tìm thấy khách hàng với mã ${customerId}.` });
+        }
+        
+    } catch (err) {
+        res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa khách hàng.' });
     }
 });
 

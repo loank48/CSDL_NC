@@ -53,7 +53,7 @@ const config3 = {
     "enableArithAbort": true,
   },
   "port": 1433, // Cổng kết nối, mặc định là 1433
-};
+};*/
         let pool;
 
         try {

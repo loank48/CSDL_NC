@@ -87,6 +87,47 @@ class HoaDonNhap {
                 throw err;
             }
         }
+    async delete(MaHDN) {
+                try {
+                    const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+            
+                    // Kiểm tra xem bản ghi có tồn tại không
+                    const checkQuery = `
+                        SELECT COUNT(*) AS count 
+                        FROM dbo.HoaDonNhap 
+                        WHERE MaHDN = @MaHDN
+                    `;
+                    const checkResult = await pool.request()
+                        .input('MaHDN', MaHDN) // Đảm bảo kiểu dữ liệu phù hợp
+                        .query(checkQuery);
+            
+                    const count = checkResult.recordset[0].count;
+            
+                    if (count === 0) {
+                        return { success: false, message: `Không tìm thấy HDN với mã ${MaHDN}` };
+                    }
+            
+                    // Thực hiện xóa bản ghi
+                    const deleteQuery = `
+                        DELETE FROM dbo.HoaDonNhap 
+                        WHERE MaHDN = @MaHDN
+                    `;
+                    const deleteResult = await pool.request()
+                        .input('MaHDN', MaHDN)
+                        .query(deleteQuery);
+            
+                    return {
+                        success: true,
+                        message: `Đã xóa thành công HDN với mã ${MaHDN}`,
+                        rowsAffected: deleteResult.rowsAffected,
+                    };
+                } catch (err) {
+                    console.error(`Lỗi khi xóa HDN có mã ${MaHDN}:`, err);
+                    throw err;
+                }
+            }
+    }
 }
+    
 
 module.exports = new HoaDonNhap();

@@ -52,17 +52,6 @@ router.get('/update/:purchaseInvoiceId', async (req, res) => {
     }
 });
 
-// Delete Purchase Invoice
-router.delete('/:purchaseInvoiceId', async (req, res) => {
-    try {
-        const doc = await HoaDonNhap.findByIdAndDelete(req.params.purchaseInvoiceId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 // Update Purchase Invoice
 router.post('/update/:purchaseInvoiceId', async (req, res) => {
     try {
@@ -81,6 +70,35 @@ router.post('/update/:purchaseInvoiceId', async (req, res) => {
     } catch (err) {
         console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
+    }
+});
+
+// Delete Purchase Invoice
+router.delete('/:purchaseInvoiceId', async (req, res) => {
+    try {
+        const doc = await HoaDonNhap.findByIdAndDelete(req.params.purchaseInvoiceId);
+        res.send(doc);
+    } catch (err) {
+        console.log('Error: ', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Delete HDB
+router.post('/:purchaseInvoiceId', async (req, res) => {
+    try {
+        const purchaseInvoiceId = req.params.purchaseInvoiceId; // Lấy storeId từ URL
+        const result = await HoaDonNhap.delete(purchaseInvoiceId); // Gọi hàm xóa trong model
+        
+        if (result.rowsAffected.length > 0) {
+            res.redirect('/hoadonnhap');
+            // res.status(200).send({ success: true, message: `HDN với mã ${purchaseInvoiceId} đã bị xóa.` });
+        } else {
+            res.status(404).send({ success: false, message: `Không tìm thấy HDN với mã ${purchaseInvoiceId}.` });
+        }
+        
+    } catch (err) {
+        res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa HDB.' });
     }
 });
 

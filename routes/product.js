@@ -87,16 +87,6 @@ router.post('/update/:productID', async (req, res) => {
 //     }
 // });
 
-router.delete('/:MaSP', async (req, res) => {
-    try {
-        const { MaSP } = req.params; // Lấy mã sản phẩm từ URL
-        const result = await Product.deleteProduct(MaSP); // Gọi hàm deleteProduct
-        res.status(200).json({ success: true, message: 'Product deleted successfully' }); // Trả về phản hồi JSON
-
-    } catch (err) {
-        res.status(500).json({ success: false, message: err.message }); // Trả về lỗi nếu xảy ra
-    }
-});
 
 // router.post('/:productId', async (req, res) => {
 //     try {
@@ -122,5 +112,5 @@ router.delete('/:MaSP', async (req, res) => {
 //         res.status(500).send('Internal Server Error');
 //     }
 // });
-
+ 
 module.exports = router;

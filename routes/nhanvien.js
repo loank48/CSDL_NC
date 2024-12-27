@@ -61,16 +61,6 @@ router.get('/update/:staffId', async (req, res) => {
     }
 });
 
-// Delete staff
-router.delete('/:staffId', async (req, res) => {
-    try {
-        const doc = await NhanVien.findByIdAndDelete(req.params.staffId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
 
 // Update staff
 router.post('/update/:staffId', async (req, res) => {
@@ -100,4 +90,21 @@ router.post('/update/:staffId', async (req, res) => {
     }
 });
 
+// Delete staff
+router.post('/:staffId', async (req, res) => {
+    try {
+        const staffId = req.params.staffId; // Lấy storeId từ URL
+        const result = await NhanVien.delete(staffId); // Gọi hàm xóa trong model
+        
+        if (result.rowsAffected.length > 0) {
+            res.redirect('/nhanvien ');
+            // res.status(200).send({ success: true, message: `HDB với mã ${salesInvoiceId} đã bị xóa.` });
+        } else {
+            res.status(404).send({ success: false, message: `Không tìm thấy nhân viên với mã ${staffId}.` });
+        }
+        
+    } catch (err) {
+        res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa nhân viên.' });
+    }
+});
 module.exports = router;

@@ -99,6 +99,47 @@ class NhanVien {
         throw err;
     }
 }
+async delete(MaNV) {
+            try {
+                const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+        
+                // Kiểm tra xem bản ghi có tồn tại không
+                const checkQuery = `
+                    SELECT COUNT(*) AS count 
+                    FROM dbo.NhanVien 
+                    WHERE MaNV = @MaNV 
+                `;
+                const checkResult = await pool.request()
+                    .input('MaNV', MaNV) // Đảm bảo kiểu dữ liệu phù hợp
+                    .query(checkQuery);
+        
+                const count = checkResult.recordset[0].count;
+        
+                if (count === 0) {
+                    return { success: false, message: `Không tìm thấy nhân viên với mã ${MaNV}` };
+                }
+        
+                // Thực hiện xóa bản ghi
+                const deleteQuery = `
+                    DELETE FROM dbo.NhanVienanVien
+                    WHERE MaNV = @MaNV 
+                `;
+                const deleteResult = await pool.request()
+                    .input('MaNV', MaNV)
+                    .query(deleteQuery);
+        
+                return {
+                    success: true,
+                    message: `Đã xóa thành công nhân viên với mã ${MaNV}`,
+                    rowsAffected: deleteResult.rowsAffected,
+                };
+            } catch (err) {
+                console.error(`Lỗi khi xóa nhân viên có mã ${MaNV}:`, err);
+                throw err;
+            }
+        }
+}
+
 }
 
 module.exports = new NhanVien();

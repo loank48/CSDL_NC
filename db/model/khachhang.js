@@ -91,6 +91,45 @@ async save(data) {
             throw err;
         }
     }
+    async delete(MaKH) {
+                try {
+                    const pool = await sql._connect(); // Kết nối với cơ sở dữ liệu
+            
+                    // Kiểm tra xem bản ghi có tồn tại không
+                    const checkQuery = `
+                        SELECT COUNT(*) AS count 
+                        FROM dbo.KhachHang
+                        WHERE MaKH = @MaKH
+                    `;
+                    const checkResult = await pool.request()
+                        .input('MaKH', MaKH) // Đảm bảo kiểu dữ liệu phù hợp
+                        .query(checkQuery);
+            
+                    const count = checkResult.recordset[0].count;
+            
+                    if (count === 0) {
+                        return { success: false, message: `Không tìm thấy kkhách hàng với mã ${MaKH}` };
+                    }
+            
+                    // Thực hiện xóa bản ghi
+                    const deleteQuery = `
+                        DELETE FROM dbo.KhachHang
+                        WHERE MaKH = @MaKH
+                    `;
+                    const deleteResult = await pool.request()
+                        .input('MaKH', MaKH)
+                        .query(deleteQuery);
+            
+                    return {
+                        success: true,
+                        message: `Đã xóa thành công khách hàng với mã ${MaKH}`,
+                        rowsAffected: deleteResult.rowsAffected,
+                    };
+                } catch (err) {
+                    console.error(`Lỗi khi xóa khách hàng có mã ${MaKH}:`, err);
+                    throw err;
+                }
+            }
 }
 
 module.exports = new KhachHang();

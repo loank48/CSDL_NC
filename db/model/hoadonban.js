@@ -99,7 +99,7 @@ class HoaDonBan {
                     WHERE MaHDB = @MaHDB
                 `;
                 const checkResult = await pool.request()
-                    .input('MaBDB', MaHDB) // Đảm bảo kiểu dữ liệu phù hợp
+                    .input('MaHDB', MaHDB) // Đảm bảo kiểu dữ liệu phù hợp
                     .query(checkQuery);
         
                 const count = checkResult.recordset[0].count;

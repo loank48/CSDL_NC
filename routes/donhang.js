@@ -52,17 +52,6 @@ router.get('/update/:orderId', async (req, res) => {
     }
 });
 
-// Delete order
-router.delete('/:orderId', async (req, res) => {
-    try {
-        const doc = await DonHang.findByIdAndDelete(req.params.orderId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 // Update order
 router.post('/update/:orderId', async (req, res) => {
     try {
@@ -79,6 +68,25 @@ router.post('/update/:orderId', async (req, res) => {
     } catch (err) {
         console.log('Error: ', err);
         res.status(500).send('Internal Server Error');
+    }
+});
+
+
+// Delete order
+router.post('/:orderId', async (req, res) => {
+    try {
+        const orderId = req.params.orderId; // Lấy orderId từ URL
+        const result = await DonHang.delete(orderId); // Gọi hàm xóa trong model
+        
+        if (result.rowsAffected.length > 0) {
+            res.redirect('/donhang');
+            // res.status(200).send({ success: true, message: `Cửa hàng với mã ${orderID} đã bị xóa.` });
+        } else {
+            res.status(404).send({ success: false, message: `Không tìm thấy đơn hàng với mã ${orderID}.` });
+        }
+        
+    } catch (err) {
+        res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa đơn hàng.' });
     }
 });
 

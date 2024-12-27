@@ -50,16 +50,6 @@ router.get('/update/:categoryId', async (req, res) => {
     }
 });
 
-// Delete category
-router.delete('/:categoryId', async (req, res) => {
-    try {
-        const doc = await LoaiSanPham.findByIdAndDelete(req.params.categoryId);
-        res.send(doc);
-    } catch (err) {
-        console.log('Error: ', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
 
 // Update category
 router.post('/update/:categoryId', async (req, res) => {
@@ -78,5 +68,24 @@ router.post('/update/:categoryId', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+
+ // Delete category
+ router.post('/:categoryId', async (req, res) => {
+     try {
+         const categoryId = req.params.categoryId; // Lấy categoryId từ URL
+         const result = await LoaiSanPham.delete(categoryId); // Gọi hàm xóa trong model
+         
+         if (result.rowsAffected.length > 0) {
+             res.redirect('/loaisanpham');
+             // res.status(200).send({ success: true, message: `HDB với mã ${salesInvoiceId} đã bị xóa.` });
+         } else {
+             res.status(404).send({ success: false, message: `Không tìm thấy loại sản phẩm với mã ${categoryId}.` });
+         }
+         
+     } catch (err) {
+         res.status(500).send({ success: false, message: 'Đã xảy ra lỗi khi xóa loại sản phẩm.' });
+     }
+ });
 
 module.exports = router;
